@@ -28,7 +28,7 @@ jobs:
             --exclude='uploads/' \
             ./ /var/www/html/toofaan/
 
-      # 3. Fix permissions (important for PHP/Moodle)
+      # 3. Fix permissions (important for PHP/Moodle-Test)
       - name: Set Permissions
         run: |
           sudo chown -R www-data:www-data /var/www/html/toofaan/
