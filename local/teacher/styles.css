@@ -1,0 +1,107 @@
+#course-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-left: 30px;
+}
+
+#course-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+#course-form .col {
+    margin-bottom: 10px;
+    margin-left: 20px;
+}
+
+#sectionContainer table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+#sectionContainer table tr {
+    margin-bottom: 10px;
+    display: table;
+    width: 100%;
+    box-sizing: border-box;
+}
+#sectionContainer table td {
+    padding: 8px;
+    border: 1px solid #d2cccc;
+    text-align: left;
+    border: none;
+}
+
+#sectionContainer {
+    border: 1px solid #5e5c5c;
+    width: 1100px;
+    padding: 10px;
+    margin-left: -150px;
+}
+.select-radius {
+border-radius: 50%;
+width: 20px;
+height: 20px;
+padding: 0;
+border: 2px solid #808080;
+cursor: pointer;
+outline: none !important;
+}
+
+#go-to-test-center {
+    background-color: #ea6645;
+    border: none;
+    color: #f4ecec;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    height: 50px;
+    width: 200px;
+    margin-bottom: 20px;
+}
+
+
+#sectionContainer table td:nth-child(1),
+#sectionContainer table th:nth-child(1) {
+width: 8%;
+text-align: left;
+}
+
+#sectionContainer table td:nth-child(2),
+#sectionContainer table th:nth-child(2) {
+width: 20%;
+text-align: left;
+}
+
+#sectionContainer table td:nth-child(3), /* Status column */
+#sectionContainer table th:nth-child(3) { /* Status heading */
+width: 15%;
+text-align: left;
+}
+
+#sectionContainer table td:nth-child(4), /* Activities column */
+#sectionContainer table th:nth-child(4) { /* Activities heading */
+width: 35%;
+text-align: left;
+}
+#content-wrapper label[for="yui_3_17_2_1_1700218695231_26"] {
+    margin-bottom: 50px;
+}
+#course-form .col label {
+    margin-bottom: 5px;
+}
+
+#overview-grade_filter {
+    float: right;
+    margin-top: -70px;
+}

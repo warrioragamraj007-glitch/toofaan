@@ -1,0 +1,231 @@
+#block-region-side-pre{
+        display:none;
+    }
+    #region-main{
+        margin-right: 2%;
+        width: 96% !important;
+    }
+
+        #shd2{
+        display: none;
+    }
+    .sublist-title {
+    background-color: #012951;
+    color: #fff;
+    font-weight: bold;
+    padding: 5px;
+    vertical-align: bottom;
+    border-radius: 5px 5px 0 0;
+}
+
+.lastcol{
+text-align:left !important;
+}
+h3{margin-top:0px !important;}
+#studentname span {
+    font-size: 1.2em !important;
+}
+#studentname {
+    text-align: center;
+}
+/*********** VPL CSS *************/
+.nav-tabs:nth-child(1)
+{
+	display:none;
+}
+#page-mod-vpl-forms-edit .nav:nth-of-type(1)
+{
+	display:none;
+}
+#page-mod-vpl-forms-edit .nav>li:nth-child(1) {
+display:none;
+}
+#page-mod-vpl-forms-edit .nav>li:nth-child(3) {
+display:none;
+}
+#page-mod-vpl-forms-edit .nav>li:nth-child(4) {
+display:none;
+}
+#page-mod-vpl-forms-edit .nav>li:nth-child(5) {
+display:none;
+}
+.breadcrumb > li:nth-child(2),.breadcrumb > li:nth-child(3) ,.breadcrumb > li:nth-child(4){
+display:none;
+}
+/******** FOR HEADER ************/
+ .usermenu .moodle-actionmenu ul:nth-child(2) li:nth-child(2) {
+display:none;
+}
+.usermenu .moodle-actionmenu ul:nth-child(2) li:nth-child(3) {
+display:none;
+}
+.usermenu .moodle-actionmenu ul:nth-child(2) li:nth-child(4) {
+display:none;
+}
+ .usermenu .moodle-actionmenu ul:nth-child(2) li:nth-child(5) {
+/*display:none;*/
+}
+ .usermenu .moodle-actionmenu ul:nth-child(2) li:nth-child(6) {
+display:none;
+}
+/************** STYLES BY ANUSHA ******/
+#vpl_ide_about,#vpl_ide_fullscreen{
+float: right;
+    margin-right: 20px !important;
+    background-color: #e7532e !important;
+    color: #fff !important;
+
+}
+#vpl_ide_about,#vpl_ide_fullscreen a{
+background-color: #e7532e !important;
+    color: #fff !important;
+    background: none !important;
+    font-family: 'Montserrat','Arial',sans-serif;
+    font-size: 12px;
+
+}
+#page-header{
+margin-left: 39px !Important;
+}
+#page {
+    margin-top: 5px !important;
+    border-color: #e4e1da !important;
+    box-shadow: 0px 1px 3px rgba(253,250,243, 0.45) !important;
+}
+
+
+/* teacher my reports css is here (mahesh) */
+.tab-content > .tab-pane,
+.pill-content > .pill-pane {
+    display: none;
+}
+
+.tab-content > .active,
+.pill-content > .active {
+    display: block;
+    margin-left: 1px
+}
+
+.tabs-below > .nav-tabs {
+    border-top: 1px solid #ddd;
+}
+
+.tabs-below > .nav-tabs > li {
+    margin-top: -1px;
+    margin-bottom: 0;
+}
+
+.tabs-below > .nav-tabs > li > a {
+    -webkit-border-radius: 0 0 4px 4px;
+    -moz-border-radius: 0 0 4px 4px;
+    border-radius: 0 0 4px 4px;
+}
+
+.tabs-left > .nav-tabs > li,
+.tabs-right > .nav-tabs > li {
+    float: none;
+}
+
+.tabs-left > .nav-tabs > li > a,
+.tabs-right > .nav-tabs > li > a {
+    min-width: 74px;
+    margin-right: 0;
+    margin-bottom: 3px;
+}
+
+.tabs-left > .nav-tabs {
+    float: left;
+    margin-right: 19px;
+    border-right: 1px solid #ddd;
+    font-size:14px;
+}
+
+.tabs-left > .nav-tabs > li > a {
+    margin-right: -1px;
+    -webkit-border-radius: 4px 0 0 4px;
+    -moz-border-radius: 4px 0 0 4px;
+    border-radius: 4px 0 0 4px;
+}
+
+.tabs-right > .nav-tabs {
+    float: right;
+    margin-left: 19px;
+    border: 1px solid #ddd;
+}
+
+.tabs-right > .nav-tabs > li > a {
+    margin-left: -1px;
+    -webkit-border-radius: 0 4px 4px 0;
+    -moz-border-radius: 0 4px 4px 0;
+    border-radius: 0 4px 4px 0;
+}
+#filterdiv,#searchdiv {
+    width: 100%;
+    height: auto;
+    z-index: 1;
+}
+
+#filterdiv > span,#searchdiv >span {
+    display: block;
+  text-align:center;
+    cursor:pointer;
+    padding: 5px;
+    color: #01366a !important;
+    background-color: #FFF;
+    margin-bottom: 3px;
+}
+.nav-tabs:nth-child(1) {
+    display: block;
+}
+
+#region-main {
+    margin-right: 0;
+    width: 100% !important;
+}
+.container .container-demo{
+    margin-top: 50px;
+}
+.tab-pane{
+    min-height: 200px;
+}
+select {
+    width: 100% !important;
+}
+.dropdown-lable {
+    font-size: 14px;
+    padding: 5px;
+    text-align: left;
+}
+.tab-content {
+    padding-top:0px;
+}
+#page-navbar{
+display:none !important;
+}
+/* end of teacher myreports */
+
+/*vpl css changes for teacher*/
+/*changed by mahesh start*/
+
+.vpl_ide_tr,.box .generalbox{
+    border: 1px solid #aaaaaa !important;
+}
+#vpl_ide_download,#vpl_ide_delete,#vpl_ide_resetfiles,#vpl_ide_rename,#vpl_ide_sort,#vpl_ide_select_all,
+#vpl_ide_find,#vpl_ide_find_replace,#vpl_ide_next,#vpl_ide_comments,#vpl_ide_console,#vpl_ide_fullscreen,.userpicture{
+    display: none;
+}
+#vpl_ide_timeleft{
+    display: none !important;
+}
+#page-mod-vpl-forms-edit .nav-tabs{
+    display:none !important;
+}
+.vpl_ide {
+    margin-top: 25px;
+}
+.nav-tabs{
+    display: none !important;
+}
+#page-teacher-student_profile .nav-tabs,#page-teacher-myreports .nav-tabs, #page-student-student_profile .nav-tabs{
+    display: block !important;
+}

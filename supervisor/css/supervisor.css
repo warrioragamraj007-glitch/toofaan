@@ -1,0 +1,613 @@
+.nav {
+    margin-bottom: 18px;
+    margin-left: 0;
+    list-style: none;
+}
+
+.nav > li > a {
+    display: block;
+}
+
+.nav-tabs{
+    *zoom: 1;
+}
+
+.nav-tabs:before,
+.nav-tabs:after {
+    display: table;
+    content: "";
+}
+
+.nav-tabs:after {
+    clear: both;
+}
+
+.nav-tabs > li {
+    float: left;
+}
+
+.nav-tabs > li > a {
+    padding-right: 12px;
+    padding-left: 12px;
+    margin-right: 2px;
+    line-height: 14px;
+}
+
+.nav-tabs {
+    border-bottom: 1px solid #ddd;
+}
+
+.nav-tabs > li {
+    margin-bottom: -1px;
+}
+
+.nav-tabs > li > a {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    line-height: 18px;
+    border: 1px solid transparent;
+    -webkit-border-radius: 4px 4px 0 0;
+    -moz-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
+}
+
+.nav-tabs > li > a:hover {
+    border-color: #eeeeee #eeeeee #dddddd;
+}
+
+.nav-tabs > .active > a,
+.nav-tabs > .active > a:hover {
+    color: #555555;
+    cursor: default;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+}
+
+li {
+    line-height: 18px;
+}
+
+.tab-content.active{
+    display: block;
+    margin-left: 0px;
+    border: 1px solid rgb(204, 204, 204);
+    padding: 10px 15px;
+    min-height: 400px;
+}
+
+.tab-content.hide{
+    display: none;
+}
+.search-box {
+    border: 1px solid rgb(204, 204, 204);
+    padding: 10px 2px 0px 2px;
+    /*border-radius: 10px 10px 0px 0px;*/
+    margin-bottom: 0px;
+}
+
+.search-results{
+    border:1px solid #ccc;
+}
+.student-list{
+    border-right:1px solid #ccc;
+
+}
+.student-info{
+
+    min-height:420px;
+}
+input, button, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    width: 100%;
+    height: 40px;
+    font-size: 14px;
+    padding: 4px;
+}
+.results{
+    border:1px solid #ccc;min-height:350px;
+    margin-bottom: 20px;
+}
+.students{
+    border-right: 1px solid #ccc;
+    min-height: 390px
+}
+.info{
+    min-height:320px;
+    padding: 0px;
+}
+.nav-tabs {
+    border-bottom: 0px solid #ddd;
+}
+.nav {
+    margin-bottom: 1px;
+}
+h2{
+    padding-top: 15px;
+
+}
+.students li{
+    list-style-type: none;
+    padding:5px 10px;
+    font-size:14px;
+    border-bottom: 1px solid #ccc;
+
+}
+.students li:hover{
+    font-color:blue;
+}
+
+#student-table thead tr{
+    font-size: 16px;
+    border-bottom: 2px solid rgb(204, 204, 204);
+    /* padding: 0px 7% !important;*/
+   /* width: 100%;*/
+
+}
+#student-table thead th{
+    /* padding: 0px 7% !important;*/
+    /*display: inline-block;*/
+    text-align: center;
+    padding: 0 20px;
+}
+#student-table tr{
+    font-size: 14px;
+    border-bottom: 1px solid rgb(204, 204, 204);
+    /* width: 100%;*/
+    /*display: inline-block;*/
+   /* padding: 0px 7% !important;*/
+
+}
+
+#student-table tr td{
+    font-size: 14px;
+    /*display: inline-block;*/
+    /* padding: 0px 7% !important;*/
+    text-align:center;
+
+}
+
+.nav-tabs > li a {
+    border-width: 1px !important;
+}
+
+/*popup and student info css */
+
+.studentsinfo-header {
+    padding-top: 15px;
+}
+.students-list {
+
+}
+/*#student-table thead,#student-table tbody { display: block; }
+#student-table tbody {
+    height: 450px;
+    overflow-y: auto;    //Trigger vertical scroll
+    overflow-x: hidden;  // Hide the horizontal scroll
+}
+*/
+
+
+
+.student{
+    cursor: pointer;
+}
+.status-count{
+    margin: 10px 0px;
+    border:1px solid #c3c3c3;
+    margin: 2px;
+    width: 24%;
+    float: left;
+    height: 50px;
+    font-size: 13px;
+}
+.status-count div{
+    float: left;
+    padding-top: 15px;
+    text-align: center;
+}
+.status-box{
+
+    width: 100%; margin-bottom: 10px;
+}
+.status-icons{
+    width: 100%;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 10px;
+
+}
+.status-icons span {
+    padding: 5px;
+    cursor: pointer;
+    margin: 2px;
+}
+.status-count-label {
+    width: 60%;
+    height: 100%;
+    color:white;
+}
+.meangrade-label{
+    background-color: #0070C0;
+}
+.attandance-label{
+    background-color: #00B050;
+}
+.labs-label{
+    background-color:#00B0F0;
+}
+.quiz-lable{
+    background-color:#2E75B6
+}
+.status-values {
+    background-color: #BDD7EE;
+    height: 100%;
+    width: 40%;
+}
+.table-responsive {
+    min-height: 0.01%;
+    overflow-x: hidden;
+}
+#myTable,#student-attandance-table,#student-grade-table{
+    border: 1px solid #e4e1da;
+}
+#myTable thead tr th,#student-attandance-table thead tr th,#student-grade-table thead tr th{
+    background-color: #ea6645;
+    background-image: linear-gradient(to bottom, #ea6645, #ea6645);
+    background-repeat: repeat-x;
+    color: #fff !important;
+    font-weight: bold !important;
+    padding: 3px !important;
+    text-align: center;
+    border: 1px solid #e4e1da;
+    cursor: pointer;
+}
+#myTable tbody tr td ,#student-attandance-table tr td,#student-grade-table tr td{
+    border: 1px solid #e4e1da;
+    vertical-align: middle;
+    text-align: center;
+}
+.activestudent {
+    background-color: #ddd;
+}
+#loading {
+    float:right;display:none;padding-left: 50px;
+}
+#email-loading {
+    display:none;
+}
+.nicEdit-main{
+
+    outline: medium none;
+}
+
+
+
+
+
+.box {
+    width: 20%;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.2);
+    padding: 35px;
+    border: 2px solid #fff;
+    border-radius: 20px/50px;
+    background-clip: padding-box;
+    text-align: center;
+}
+
+
+.overlay {
+    position: absolute;
+
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+}
+.overlay1 {
+    visibility: visible;
+    opacity: 1;
+    z-index: 99;
+    top: 10%;
+    height: 125%;
+}
+
+.popup {
+    margin: 5px;
+    padding: 10px 5px;
+    background: #fff;
+    border-radius: 5px;
+    width: 64%;
+    position: relative;
+    transition: all 5s ease-in-out;
+    top: 15%;
+    left: 15%;
+}
+
+.popup h2 {
+    margin-top: 0;
+    color: #333;
+    font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+    position: absolute;
+    top: 0%;
+    right: 2%;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+}
+.popup .close:hover {
+    color: orange;
+}
+.popup .content {
+
+    overflow: hidden;
+}
+
+.current-selection {
+    background-color: #ea6645;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 14px;
+    padding: 10px;
+    display: none;
+    margin-bottom: 10px;
+}
+.attendance-current-selection {
+    background-color: #e3e3e3;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #000;
+    font-size: 14px;
+    padding: 10px;
+    display: none;
+    margin-bottom: 10px;
+}
+.fa-arrow-down {
+    cursor: pointer;
+    padding: 6px;
+    position: relative;
+    z-index: 9;
+}
+
+
+
+/*
+clear child float (pika-lendar), using the famous micro clearfix hack
+http://nicolasgallagher.com/micro-clearfix-hack/
+*/
+.pika-single:before,
+.pika-single:after {
+    content: " ";
+    display: table !important;
+}
+.pika-single:after { clear: both }
+.pika-single { *zoom: 1 }
+
+.pika-single.is-hidden {
+    display: none;
+}
+
+.pika-single.is-bound {
+    position: absolute;
+    box-shadow: 0 5px 15px -5px rgba(0,0,0,.5);
+}
+
+.pika-lendar {
+    float: left !important;
+    width: 240px !important;
+    margin: 8px !important;
+}
+
+.pika-title {
+    position: relative;
+    text-align: center;
+}
+
+.pika-label {
+    display: inline-block !important;
+    *display: inline !important;
+    position: relative !important;
+    z-index: 9999 !important;
+    overflow: hidden !important;
+    margin: 0;
+    padding: 5px 3px !important;
+    font-size: 14px !important;
+    line-height: 20px !important;
+    font-weight: bold !important;
+    background-color: #fff !important;
+}
+.pika-title select {
+    cursor: pointer !important;
+    position: absolute !important;
+    z-index: 9998 !important;
+    margin: 0 !important;
+    left: 0 !important;
+    top: 5px !important;
+    filter: alpha(opacity=0);
+    opacity: 0 !important;
+}
+
+.pika-prev,
+.pika-next {
+    display: block;
+    cursor: pointer;
+    position: relative;
+    outline: none;
+    border: 0;
+    padding: 0;
+    width: 20px !important;
+    height: 30px !important;
+    /* hide text using text-indent trick, using width value (it's enough) */
+    text-indent: 20px;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    background-color: transparent !important;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 75% 75%;
+    opacity: .5;
+    *position: absolute !important;
+    *top: 0 !important;
+}
+
+.pika-prev:hover,
+.pika-next:hover {
+    opacity: 1 !important;
+}
+
+.pika-prev,
+.is-rtl .pika-next {
+    float: left !important;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAeCAYAAAAsEj5rAAAAUklEQVR42u3VMQoAIBADQf8Pgj+OD9hG2CtONJB2ymQkKe0HbwAP0xucDiQWARITIDEBEnMgMQ8S8+AqBIl6kKgHiXqQqAeJepBo/z38J/U0uAHlaBkBl9I4GwAAAABJRU5ErkJggg==');
+    *left: 0;
+}
+
+.pika-next,
+.is-rtl .pika-prev {
+    float: right !important;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAeCAYAAAAsEj5rAAAAU0lEQVR42u3VOwoAMAgE0dwfAnNjU26bYkBCFGwfiL9VVWoO+BJ4Gf3gtsEKKoFBNTCoCAYVwaAiGNQGMUHMkjGbgjk2mIONuXo0nC8XnCf1JXgArVIZAQh5TKYAAAAASUVORK5CYII=');
+    *right: 0;
+}
+
+.pika-prev.is-disabled,
+.pika-next.is-disabled {
+    cursor: default !important;
+    opacity: .2 !important;
+}
+
+.pika-select {
+    display: inline-block !important;
+    *display: inline !important;
+}
+
+.pika-table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    border-spacing: 0 !important;
+    border: 0 !important;
+}
+
+.pika-table th,
+.pika-table td {
+    width: 14.285714285714286% !important;
+    padding: 0 !important;
+}
+
+.pika-table th {
+    color: #fff !important;
+    font-size: 12px !important;
+    line-height: 25px !important;
+    font-weight: bold !important;
+    text-align: center !important;
+}
+
+.pika-button {
+    cursor: pointer !important;
+    display: block !important;
+    box-sizing: border-box !important;
+    -moz-box-sizing: border-box !important;
+    outline: none !important;
+    border: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    padding: 5px !important;
+    color: #666 !important;
+    font-size: 12px !important;
+    line-height: 15px !important;
+    text-align: right !important;
+    background: #f5f5f5 !important;
+}
+
+.pika-week {
+    font-size: 11px !important;
+    color: #999 !important;
+}
+
+.is-today .pika-button {
+    color: #33aaff !important;
+    font-weight: bold !important;
+}
+
+.is-selected .pika-button {
+    color: #fff !important;
+    font-weight: bold !important;
+    background: #33aaff !important;
+    box-shadow: inset 0 1px 3px #178fe5 !important;
+    border-radius: 3px !important;
+}
+
+.is-inrange .pika-button {
+    background: #D5E9F7 !important;
+}
+
+.is-startrange .pika-button {
+    color: #fff !important;
+    background: #6CB31D !important;
+    box-shadow: none !important;
+    border-radius: 3px !important;
+}
+
+.is-endrange .pika-button {
+    color: #fff !important;
+    background: #33aaff !important;
+    box-shadow: none !important;
+    border-radius: 3px !important;
+}
+
+.is-disabled .pika-button,
+.is-outside-current-month .pika-button {
+    pointer-events: none !important;
+    cursor: default !important;
+    color: #999 !important;
+    opacity: .3 !important;
+}
+
+.pika-button:hover {
+    color: #fff !important;
+    background: #ff8000 !important;
+    box-shadow: none !important;
+    border-radius: 3px !important;
+}
+
+/* styling for abbr */
+.pika-table abbr {
+    border-bottom: none !important;
+    cursor: help;
+}
+
+
+/*course info start*/
+
+.assistant{
+    cursor: pointer;
+}
+
+.download{
+    background-color: #574743;
+    color: white;
+    cursor: pointer;
+    float: right;
+    padding: 5px;
+}
+.student{
+    cursor: pointer;
+}
+#loading {
+    float:right;display:none;
+}
+
+#b .search-box {
+    margin-bottom: 10px;
+}
+/*course info end*/

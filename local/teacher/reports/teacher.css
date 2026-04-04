@@ -1,0 +1,29 @@
+#page-teacher-useroutline #action-menu-0-menu > li:nth-child(2),
+#page-teacher-useroutline #action-menu-0-menu > li:nth-child(3),
+#page-teacher-useroutline #action-menu-0-menu > li:nth-child(4),
+#page-teacher-useroutline #action-menu-0-menu > li:nth-child(5),
+#page-teacher-useroutline #action-menu-0-menu > li:nth-child(6){
+    display: none !important;
+}
+#page-mod-quiz-review  #action-menu-0-menu > li:nth-child(2),
+#page-mod-quiz-review  #action-menu-0-menu > li:nth-child(3),
+#page-mod-quiz-review  #action-menu-0-menu > li:nth-child(4),
+#page-mod-quiz-review  #action-menu-0-menu > li:nth-child(5),
+#page-mod-quiz-review  #action-menu-0-menu > li:nth-child(6){
+    display: none !important;
+}
+#block-region-side-pre{
+    display: none !important;
+}
+#page-mod-quiz-review  #region-main.span8{
+width: 98.359%  !important;;
+}
+#page-mod-quiz-review .que .comment , #page-mod-quiz-review .que .outcome,#page-mod-quiz-review .que .info, #page-mod-quiz-review .submitbtns{
+   display: none !important;
+}
+#page-mod-quiz-review  .generaltable tr:nth-child(1) a{
+  pointer-events: none;
+}
+#page-mod-quiz-review .breadcrumb-nav .breadcrumb {
+  display: none !important;
+}

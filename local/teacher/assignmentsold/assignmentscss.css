@@ -1,0 +1,561 @@
+
+.latest-performance{
+    display:none;
+}
+.graph,.latesttable{
+    background-color: #ea6645;float:right;
+}
+.download,.download2{
+    cursor:pointer;
+    background-color: #574743;
+    float: right;
+    padding: 8px 6px;
+    color: white;
+}
+.graph,.latestsearch,.download{
+    display: none;
+}
+.status-icons{
+    width: 100%;
+    margin-bottom: 13px;
+    text-align: center;
+}
+.status-icons span {
+    color: #fff;
+    cursor: pointer;
+    margin: 2px;
+    padding: 6px;
+    font-size: 12px;
+}
+.course-results-header-bottom{
+    display: none;
+}
+.table-responsive {
+    min-height: 0.01%;
+    overflow-x: hidden;
+}
+.latest-performance-table td,.grade-info td,.studnets-info td {
+    font-size: 12px;
+}
+#myTable,#courseTable,#studentTable {
+    border: 3px solid #e4e1da;
+}
+#myTable thead tr th,#courseTable thead tr th,#studentTable thead tr th {
+    background-color: #ea6645;
+    background-image: linear-gradient(to bottom, #ea6645, #ea6645);
+    background-repeat: repeat-x;
+    color: #fff !important;
+    font-weight: bold !important;
+    padding: 3px !important;
+    text-align: center;
+    border: 1px solid #e4e1da;
+}
+
+#myTable tbody tr td,#courseTable tbody tr td,#studentTable tbody tr td {
+    border: 1px solid #e4e1da;
+    vertical-align: middle;
+    text-align: center;
+    max-width: 50px;
+}
+
+
+
+.tabs-left > .nav-tabs{
+    border: none; padding: 5px;margin-right: 5px;
+}
+.tab-content {
+    border-left: 1px solid #ddd;
+}
+.tabs-left > .nav-tabs a{
+    border-color: #c3c3c3 !important;
+    border-style: solid !important;
+    border-width: 1px !important;
+    background-color: #FFF;
+}
+.tabs-left > .nav-tabs > li > a {
+    border-radius: 0;
+    color: #01366a !important;
+    padding-left: 30px;
+}
+
+
+.tabs-left > .nav-tabs .active > a, .tabs-left > .nav-tabs .active > a:hover, .tabs-left > .nav-tabs .active > a:focus {
+
+    border-left: 4px solid rgb(234, 102, 69) !important;
+    color: #ea6645 !important;
+
+}
+.tabs-left > .nav-tabs > li > a:hover{
+    background-color: #FFF !important;
+    color:#ea6645 !important;
+}
+.tabs-left > .nav-tabs > li > a > i,.tabs-left > .nav-tabs > li > span > i{
+    padding-left: 5px;
+}
+.nav.nav-tabs.tabs-left li.active {
+    border-left: 4px solid rgb(234, 102, 69) !important;
+}
+.nav.nav-tabs.tabs-left li.active a {
+    color: #ea6645 !important;
+}
+select {
+
+    border: 1px solid #ddd;
+    background: transparent;
+    padding: 5px;
+    font-size: 12px;
+    border: 1px solid #ddd;
+    height: 34px;
+  
+}
+.nav > li.tab-parents {
+    display: block;
+    padding: 10px 8px;
+    position: relative;
+    background-color: #fff;
+    border-color: #c3c3c3 !important;
+    border-style: solid !important;
+    border-width: 1px !important;
+}
+#navbar{
+    margin-left: 4%;
+    margin-top: 2%;
+}
+.col-md-4 > input {
+    width: 100% !important;min-height: 35px;
+    background-color: #fff;
+    border: 1px solid #c5c5c5;
+    margin-left: 0;
+}
+input[type="button"]:hover{
+    background-position: 0
+}
+.table-notations {
+    padding-top: 15px;
+    display:none;
+}
+.table-notations > table {
+    border: 1px solid #e4e1da;
+    font-size: 12px;
+    width: 100%;
+}
+.table-notations td {
+    border: 1px solid #e4e1da;
+    text-align: center;
+    width: 75%;
+    color:#6e6e6e;
+    padding: 4px;
+}
+.tab-pane {
+    min-height: 520px;
+}
+.tabs-left > .nav-tabs > li > a {
+    margin-right: 0px;
+}
+.course-results-header.col-md-12 {
+    background-color: #b2beca;
+    border-bottom: 0 solid #ddd;
+    margin-bottom: 0;
+    padding-top: 5px;
+}
+.student-results-header.col-md-12 {
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 10px;
+}
+.table-responsive {
+    height: 450px;
+    overflow-y: auto;
+}
+.container .container-demo {
+    margin-top: 50px;
+    min-height: 520px;
+}
+.switch-button,.search-button{
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+    -moz-transition: 0.3s;
+    -o-transition: 0.3s;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    background-color: #ea6645;
+    border: 1px solid #ddd;
+    color: #fff;
+    font-weight: bold;
+    min-height: 30px;
+    outline: none !important;
+    padding: 6px 65px;
+    cursor: pointer;
+    float: left;
+}
+.switch-button:hover,.search-button:hover{
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+    -moz-transition: 0.3s;
+    -o-transition: 0.3s;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    background-color: #ea6645;
+    border: 1px solid transparent;
+    color: #fff;
+    font-weight: bold;
+    min-height: 30px;
+    outline: none !important;
+    padding: 6px 65px;
+    cursor: pointer;
+}
+.pagecover-onload{
+    position: absolute; width: 99%; background-color: rgb(255, 255, 255); z-index: 300; opacity: 0.9; height: 89%; top: 60px;margin-left: -10px;
+}
+.table {
+    margin-bottom: 10px;
+}
+
+.filter-report{padding: 5px;float: right;}
+.fa{
+    cursor: pointer;
+}
+.stdname{
+    text-align: left !important;
+}
+.xls-reports {
+    float: left;
+    width: 50%;
+}
+.export-label{
+    font-weight: bold;
+}
+.xls-reports.export-actions {
+    margin-top: 2px;
+}
+.records-count {
+    float: left !important;
+}
+.tabbable.tabs-left {
+    /*border: 1px solid #ddd;*/
+}
+.tab-pane {
+   /* border-top: 1px solid #ddd;*/
+
+    /*padding-top: 5px;*/
+}
+.lockunlock.fa{
+    font-size: 20px;
+    margin-top: 5%;
+}
+.actbtns {
+    float: left;
+    padding: 2%;
+    width: 70%;
+    font-size: 10px;
+    text-align: right;
+}
+.gradeactbtns {
+  /*  width: 100%;*/
+    text-align: center;
+}
+.lockhide{display:none;}
+.lockshow{display:block;}
+.lockunlock.fa.fa-unlock-alt {
+    color: red;
+}
+.lockunlock.fa.fa-lock {
+    color: green;
+}
+.status-divs{
+    float: left;
+    font-size: 16px;
+    margin-left: 2%;
+    margin-top: 5px;
+    text-align: center;
+    vertical-align: middle;
+    width: 22% !important;
+    border: 1px solid #858585;
+}
+.of-lable {
+    font-size: 12px;
+}
+.status-numbers span {
+    /*padding-top: 14px;*/
+    vertical-align: middle;
+}
+.csubCount-indicator{
+    background-color: #00b0f0;
+}
+.cgradeCount-indicator {
+    background-color: #00b050;
+}
+.cstarCount-indicator{
+    background-color: #0f0;
+}
+.crstarCount-indicator{
+    background-color: #c30;
+}
+.indicator {
+
+    display: inline-block;
+    float: left;
+    height: 30px;
+    width: 25%;
+    padding: 5px;
+}
+.login-count-indicator{
+    background-color: #FF6B3C;
+}
+.status-numbers.logincount-status-numbers {
+    background-color: #ffe1d8;
+}
+.status-numbers.csubCount-status-numbers {
+    background-color: #cceffc;
+}
+.status-numbers.cgradeCount-status-numbers {
+    background-color: #ccefdc;
+}
+.status-numbers.cstarCount-status-numbers {
+    background-color: #ccffcc;
+}
+.status-numbers.crstarCount-status-numbers {
+    background-color: #f4d6cc;
+}
+.status-numbers {
+    background-color: #fff;
+    float: right;
+    width: 100%;
+}
+.status-div {
+    margin-left: 0%;
+    margin-right: 0%;
+    width: 37%;
+    float:left;
+}
+
+
+.star-img {
+    color: #fff;
+}
+.status-label {
+    color: #fff;
+}
+.statuscounts {
+    padding-top: 3px;
+}
+.showactivity {
+
+    float: left;
+    font-size: 13px;
+    padding: 10px;
+    width: 38%;
+
+}
+.showfilters{
+    float: left;
+    margin-top: 1%;
+    width: 24%;
+}
+.status-counts-div{
+    background-color: #9f9f9f;
+    border: 2px solid #e3e3e3;
+}
+#studentTable tbody,
+#studentTable thead { display: block; }
+#studentTable thead tr,#studentTable  tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+}
+
+*::before, *::after {
+    box-sizing: border-box;
+}
+*::before, *::after {
+    box-sizing: border-box;
+}
+#studentTable tbody, #studentTable thead {
+    display: block;
+}
+.grade-info {
+    height: 140px;
+    overflow-y: auto;
+}
+
+.showhide {width:40%}
+.hide{float: right}
+
+/*popup css */
+
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 3;
+}
+/*.overlay:target {
+    visibility: visible;
+    opacity: 1;
+}*/
+
+.popup {
+    margin: 100px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    width: 50%;
+    position: relative;
+    transition: all 5s ease-in-out;
+}
+.popup .close {
+    position: absolute;
+    top: 10px;
+    right: 30px;
+    transition: all 500ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+}
+.popup .close:hover {
+    color: #06D85F;
+}
+.popup .assigndescription {
+    max-height: 30%;
+    overflow: auto;
+    font-size:14px;
+}
+
+@media screen and (max-width: 700px){
+    .box{
+        width: 70%;
+    }
+    .popup{
+        width: 70%;
+    }
+}
+.assignname {
+    cursor: pointer;
+    padding: 5px;
+}
+/*popup css end*/
+.stusearch {
+    width: 100%;
+}
+.search{width:150px}
+
+.gradetime {
+    color: green;
+    font-size: 10px;
+    float: left;
+    width:100%;
+}
+.fa.fa-pencil-square-o {
+    font-size: 20px;
+   /* margin-top: 5%;*/
+    padding-left: 15%;
+    color:red;
+}
+.fa.fa-pencil-square {
+    font-size: 20px;
+    /*margin-top: 5%;*/
+    padding-left: 15%;
+    color:green;
+}
+.actbtns-l {
+    float: right;
+    /*padding-left: 10%;*/
+    width: 20%;
+    text-align: left;
+}
+select {
+    background-color: whitesmoke;
+    border-radius: 0px;
+    font-size: 12px;
+    padding: 5px;
+    border: 2px solid #c5c5c5;
+    min-height: 35px;
+}
+input[type="text"]{
+    min-height: 35px;
+    margin-bottom: 0px;
+}
+.comments {
+    color: blue;
+    margin-left: 10px;
+    cursor:pointer;
+}
+.gradeactbtns.grade {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    float: right;
+}
+.course-results-div.col-md-12 {
+    padding-bottom: 5px;
+}
+.fa.fa-arrow-circle-up,.fa.fa-arrow-circle-down {
+    color: #ea6645;
+    font-size: 30px;
+}
+
+/* indicators new css */
+.indicator {
+    display: inline-block;
+    float: left;
+    height: 30px;
+    padding: 6px;
+    width: 100%;
+
+}
+.status-divs{
+    margin-left: 0px;
+    font-size: 0.94em;
+}
+.crstarCount-indicator,.cgradeCount-indicator,.csubCount-indicator,.cstarCount-indicator{
+
+    border-bottom: 1px solid #333;
+    color: #FFF;
+    font-weight: bold;
+}
+
+.cgradeCount-indicator{
+    background-color: #006400;
+}
+.cstarCount-indicator {
+    background-color: #228b22;
+}
+.status-label {
+    color: #FFF;
+}
+.status-numbers.csubCount-status-numbers,.status-numbers.cgradeCount-status-numbers,
+.status-numbers.cstarCount-status-numbers,.status-numbers.crstarCount-status-numbers{
+    /*background: #f0f0ef none repeat scroll 0 0;*/
+    color: #333;
+}
+.statuscounts {
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+
+.refresh-icons {
+    float: right;
+    margin-right: 4%;
+    margin-top: 5%;
+}
+.fa.fa-1x.fa-refresh {
+    font-size: 18px;
+}
+.curassign {
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+}
+.showhide{
+    cursor: pointer;
+}
+

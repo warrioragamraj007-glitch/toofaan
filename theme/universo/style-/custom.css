@@ -1,0 +1,481 @@
+.breadcrumb{
+background-color:transparent;
+border-radius:0px;
+}
+.btn.btn-small {
+    font-size: 12px;
+    min-height: 30px;
+    padding: 5px 10px;
+}
+.btn {
+    -moz-border-radius: 0px !important;
+    -webkit-border-radius: 0px !important;
+    border-radius: 0px !important;
+    -moz-transition: 0.3s;
+    -o-transition: 0.3s;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    background-color: #ea6645 !important;
+    border: 2px solid transparent !important;
+    color: #fff !important;
+    font-weight: bold;
+    min-height: 40px;
+    outline: none !important;
+    padding: 8px 18px;
+    background-image: none !important;
+    text-shadow:none !important;
+    background-repeat:no-repeat !important;
+    white-space: nowrap;
+    box-shadow: none !important;
+}
+.btn.btn-color-primary {
+    background-color: #012951 !important;
+    color: #fff !important;;
+}
+.btn:active, .btn:focus {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  color: #fff !important;;
+}
+.btn:hover {
+  background-color: #e7532e !important;;
+  color: #fff !important;
+}
+.btn.btn-color-primary:hover {
+  background-color: #011c38 !important;
+}
+
+
+.icheckbox {
+  position: relative !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  background-color: whitesmoke !important;
+  border: 2px solid #c5c5c5 !important;;
+  display: inline-block !important;;
+  height: 20px !important;
+  margin-right: 10px !important;
+  position: relative !important;
+  width: 20px !important;
+  top: -1px !important;
+}
+.icheckbox:after {
+  -moz-transition: 0.3s !important;
+  -o-transition: 0.3s !important;
+  -webkit-transition: 0.3s !important;
+  transition: 0.3s !important;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0) !important;
+  opacity: 0 !important;;
+  text-shadow: none !important;
+  -webkit-font-smoothing: antialiased !important;
+  font-family: 'fontawesome' !important;
+  speak: none !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  line-height: 1 !important;
+  text-transform: none !important;
+  color: #252525 !important;
+  content: "\f00c" !important;
+  position: absolute !important;
+  line-height: 15px !important;
+  left: 2px !important;
+}
+.icheckbox.checked:after {
+  filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false) !important;
+  opacity: 1 !important;
+}
+#page-footer{
+padding:0px !important;
+}
+#footer-bottom{
+background-color: #011c38;
+color: #fff;
+padding: 20px 0;
+
+}
+.usermenu .login {
+    color: #fff !important;
+}
+.loginbox.twocolumns {
+    margin-left: 7em;
+    margin-right: 7em;
+}
+
+label.with-square-checkbox {
+  cursor: pointer;
+}
+label.with-square-checkbox span {
+  line-height: 24px;
+}
+label.with-square-checkbox span::before {
+  margin-right: 4px;
+  padding-left: 1px;
+  width: 21px;
+  height: 21px;
+background-color: whitesmoke;
+border: 2px solid #c5c5c5;
+  display: inline-block;
+  line-height: 15px;
+  content: '';
+  float: left;
+}
+label.with-square-checkbox input[type="checkbox"] {
+  display: none;
+}
+label.with-square-checkbox input[type="checkbox"]:checked + span::before {
+  font-family: 'fontawesome';
+  content: "\f00c";
+  color: #252525;
+}
+h3 {
+    font-size: 18px !important;
+    margin-top: 20px !important;
+    margin-bottom: 10px !important;
+    font-family: inherit !important;
+    font-weight: 500 !important;
+    line-height: 1.1 !important;
+    color: inherit !important;
+
+
+}
+h2{
+display: inline-block !important;
+font-size: 24px !important;
+margin-bottom: 35px !important;
+margin-top: 10px !important;
+position: relative !important;
+font-family: inherit !important;
+font-weight: 500 !important;
+line-height: 1.1 !important;
+color: inherit !important;
+box-sizing:border-box !important;
+text-transform:capitalize !important;
+padding-left:0px !important;
+}
+h1{
+display: inline-block !important;
+font-size: 36px !important;
+margin-bottom: 35px !important;
+margin-top: 10px !important;
+position: relative !important;
+}
+.loginbox .loginsub {
+    margin-right: 10em !important;
+}
+.loginbox .guestsub{
+float:left !important;
+}
+.singlebutton input[type="submit"] {
+-moz-border-radius: 0px !important;
+-webkit-border-radius: 0px !important;
+border-radius: 0px !important;
+
+-moz-transition: 0.3s !important;
+
+    -o-transition: 0.3s !important;
+
+    -webkit-transition: 0.3s !important;
+
+    transition: 0.3s !important;
+
+    background-color: #ea6645 !important;
+
+    border: 2px solid transparent !important;
+    color: #fff !important;
+    font-weight: bold !important;
+    min-height: 40px !important;
+    outline: none !important;
+    padding: 8px 18px !important;
+    background-image: none !important;
+    text-shadow:none !important;
+    background-repeat:no-repeat !important;
+    white-space: nowrap;
+    box-shadow: none !important;
+
+
+}
+.singlebutton input[type="submit"]:active, .singlebutton input[type="submit"]:focus {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  color: #fff !important;;
+}
+.singlebutton input[type="submit"]:hover {
+  background-color: #e7532e !important;;
+  color: #fff !important;
+}
+
+
+.felement.fsubmit input[type="submit"]{
+    border-color: #c5c5c5 !important;
+    color: #252525 !important;
+}
+.felement.fsubmit input[type="submit"]{
+    
+background-image: none !important;
+    text-shadow:none !important;
+    background-repeat:no-repeat !important;
+    white-space: nowrap;
+    box-shadow: none !important;
+   -moz-border-radius: 0px !important;
+-webkit-border-radius: 0px !important;
+border-radius: 0px !important;
+
+-moz-transition: 0.3s !important;
+
+    -o-transition: 0.3s !important;
+
+    -webkit-transition: 0.3s !important;
+
+    transition: 0.3s !important;
+ 
+}
+.felement.fsubmit input[type="submit"]:hover{
+ background-color: #c5c5c5 !important;
+}
+.yui3-skin-sam #page #page-content #region-main-box .row-fluid aside .block{
+background-color:none !important;
+border:0px !important;
+}
+.page-landing-page .block{
+padding : 0px !important;
+background-color:none !important;
+}
+#inst1,#inst2,#inst3,#inst4,#inst5,#inst6,#inst7,#inst8,#inst9,#inst10{
+background-color:none !important;
+border:0px !important;
+}
+.newsletter{
+padding: 20px 0px !important;
+}
+.buttons input[type="button"]{
+background-color: transparent !important;
+  border-color: #ea6645 !important;
+  color: #ea6645 !important;
+background-image: none !important;
+    text-shadow:none !important;
+    background-repeat:no-repeat !important;
+    white-space: nowrap;
+    box-shadow: none !important;
+   -moz-border-radius: 0px !important;
+-webkit-border-radius: 0px !important;
+border-radius: 0px !important;
+
+-moz-transition: 0.3s !important;
+
+    -o-transition: 0.3s !important;
+
+    -webkit-transition: 0.3s !important;
+
+    transition: 0.3s !important;
+
+}
+.buttons input[type="button"]:hover{
+background-color: #ea6645 !important;
+  color: #fff !important;
+
+}
+.moodle-actionmenu.show[data-enhanced] .menu{
+ background-color:#011c38 !important;
+ color:#fff !important;
+background-image: none !important;
+    text-shadow:none !important;
+    background-repeat:no-repeat !important;
+    white-space: nowrap;
+    box-shadow: none !important;
+   -moz-border-radius: 0px !important;
+-webkit-border-radius: 0px !important;
+border-radius: 0px !important;
+
+-moz-transition: 0.3s !important;
+
+    -o-transition: 0.3s !important;
+
+    -webkit-transition: 0.3s !important;
+
+    transition: 0.3s !important;
+
+}
+.jsenabled .usermenu .moodle-actionmenu.show .menu a{
+color:#fff !important;
+font-size :14px !important;
+}
+.usermenu .moodle-actionmenu .toggle-display .userbutton{
+color:#fff !important;
+}
+.moodle-actionmenu.show.nowrap-items[data-enhanced] .menu > li{
+padding:0px !important;
+border-bottom:1px solid rgba(255, 255, 255, 0.05) !important;
+}
+.moodle-actionmenu.show.nowrap-items[data-enhanced] .menu > li:last-child{
+
+border-bottom:0px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+.moodle-actionmenu.show.nowrap-items[data-enhanced] .menu > li a{
+line-height:3.1em !important;
+
+}
+.moodle-actionmenu.show.nowrap-items[data-enhanced] .menu > li:hover a{
+background-color:#ea6645 !important;
+
+}
+.jsenabled .usermenu .moodle-actionmenu.show .menu.align-tr-br{
+padding:0px !important;
+}
+.navbar-inner .navigation-wrapper .jsenabled .usermenu .moodle-actionmenu.show{
+background-color:none !important;
+}
+#page #page-content #adminsettings fieldset .form-buttons input.form-submit{
+    border-color: #012951 !important;
+    color: #012951 !important;
+    background-color:none !important;
+   background-image: none !important;
+    text-shadow:none !important;
+    background-repeat:no-repeat !important;
+    white-space: nowrap;
+    box-shadow: none !important;
+   -moz-border-radius: 0px !important;
+-webkit-border-radius: 0px !important;
+border-radius: 0px !important;
+
+-moz-transition: 0.3s !important;
+
+    -o-transition: 0.3s !important;
+
+    -webkit-transition: 0.3s !important;
+
+    transition: 0.3s !important;
+}
+#page #page-content #adminsettings fieldset .form-buttons input.form-submit:hover{
+
+background-color: #012951 !important;
+  color: #fff !important;
+}
+.form-buttons .form-submit{
+  border-color: #012951 !important;
+    color: #012951 !important;
+    background-color:none !important;
+   background-image: none !important;
+    text-shadow:none !important;
+    background-repeat:no-repeat !important;
+    white-space: nowrap;
+    box-shadow: none !important;
+   -moz-border-radius: 0px !important;
+-webkit-border-radius: 0px !important;
+border-radius: 0px !important;
+
+-moz-transition: 0.3s !important;
+
+    -o-transition: 0.3s !important;
+
+    -webkit-transition: 0.3s !important;
+
+    transition: 0.3s !important;
+}
+.form-buttons .form-submit:hover{
+
+background-color: #012951 !important;
+  color: #fff !important;
+}
+.continuebutton div input[type="submit"]{
+  border-color: #252525 !important;
+  color: #252525 !important;
+background-color:none !important;
+   background-image: none !important;
+    text-shadow:none !important;
+    background-repeat:no-repeat !important;
+    white-space: nowrap;
+    box-shadow: none !important;
+   -moz-border-radius: 0px !important;
+-webkit-border-radius: 0px !important;
+border-radius: 0px !important;
+
+-moz-transition: 0.3s !important;
+
+    -o-transition: 0.3s !important;
+
+    -webkit-transition: 0.3s !important;
+
+    transition: 0.3s !important;
+}
+.continuebutton div input[type="submit"]:hover {
+  background-color: #252525 !important;
+  color: white !important;
+}
+.hidden{
+display:block !important;
+}
+
+input[type="submit"] {
+  background-color: transparent;
+  border-color: #ea6645;
+  color: #ea6645;
+background-color:none !important;
+   background-image: none !important;
+    text-shadow:none !important;
+    background-repeat:no-repeat !important;
+    white-space: nowrap;
+    box-shadow: none !important;
+   -moz-border-radius: 0px !important;
+-webkit-border-radius: 0px !important;
+border-radius: 0px !important;
+
+-moz-transition: 0.3s !important;
+
+    -o-transition: 0.3s !important;
+
+    -webkit-transition: 0.3s !important;
+
+    transition: 0.3s !important;
+}
+input[type="submit"]:hover {
+  background-color: #ea6645;
+  color: #fff;
+}
+
+/*
+input[type="checkbox"] {
+  padding-left: 0px !important;
+}
+.icheckbox {
+  position: relative !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  background-color: whitesmoke !important;
+  border: 2px solid #c5c5c5 !important;
+  display: inline-block !important;
+  height: 20px !important;
+  margin-right: 10px !important;
+  position: relative !important;
+  width: 20px !important;
+  top: -1px !important;
+}
+.icheckbox:after {
+  -moz-transition: 0.3s !important;
+  -o-transition: 0.3s !important;
+  -webkit-transition: 0.3s !important;
+  transition: 0.3s !important;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0) !important;
+  opacity: 0 !important;
+  text-shadow: none !important;
+  -webkit-font-smoothing: antialiased !important;
+  font-family: 'fontawesome' !important;
+  speak: none !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  line-height: 1 !important;
+  text-transform: none !important;
+  color: #252525 !important;
+  content: "\f00c" !important;
+  position: absolute !important;
+  line-height: 15px !important;
+  left: 2px !important;
+}
+.icheckbox.checked:after {
+  filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false) !important;
+  opacity: 1 !important;
+}
+*/
+

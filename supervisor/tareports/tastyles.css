@@ -1,0 +1,163 @@
+#fit{
+	margin-bottom: 0px !important;
+}
+#wtbody tr td, table tr td {
+    border-bottom: 0px solid #E4E1DA !important;
+}
+table {
+    border-collapse: collapse !important;
+    border-spacing: 0px !important;
+    max-width: 100%;
+    background-color: #FEFAF3 !important;
+}
+#res .generaltable tbody td
+{
+     border-bottom: 1px solid #E4E1DA !important;
+}
+#res .generaltable  tbody>tr:nth-child(2n+1)>td {
+    background-color: #FFF !important;
+}
+table {
+   border-bottom: 1px solid #E4E1DA !important;
+}
+
+#rowclick thead th {
+   background-image: url(https://tele.com/teacher/reports/pix/both.gif);
+    background-repeat: no-repeat;
+    background-position: right center;
+    padding: 4px 18px 4px 4px !important;
+    white-space: normal;
+    cursor: pointer;
+}
+.rating{
+    width: 120px;
+margin-left: -28px;}
+.arating{
+    width: 120px;
+}
+.generaltable tbody td  {
+
+font-family: "Open Sans","Trebuchet MS",arial,verdana,sans-serif !important;
+vertical-align: top;
+font-size: 13px !important;
+font-style: normal;
+border-top: 0px solid #DDD;
+}
+table.flexible th, .generaltable th, table.flexible td, .generaltable td {
+    padding: 2px !important;
+    line-height: 18px !important;
+    text-align: center !important;
+}
+/****************************STARS CSS START ******************************/
+
+.stars {
+  background: url("images/stars.png") repeat-x 0 0;
+  width: 150px;
+  margin: 0 auto;
+}
+
+ .stars input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+ .stars .star-50 ~ span {
+  width: 100%;
+}
+ .stars .star-45 ~ span {
+  width: 90%;
+}
+ .stars .star-40 ~span {
+  width: 80%;
+}
+ .stars .star-35 ~ span {
+  width: 70%;
+}
+ .stars .star-30 ~ span {
+  width: 60%;
+}
+.stars .star-25 ~ span {
+  width: 50%;
+}
+.stars .star-20 ~ span {
+  width: 40%;
+}
+ .stars .star-15 ~ span {
+  width: 30%;
+}
+ .stars .star-10 ~ span {
+  width: 20%;
+}
+ .stars .star-05 ~ span {
+  width: 10%;
+}
+
+ .stars label {
+  display: block;
+  width: 30px;
+  height: 30px;
+  margin: 0!important;
+  padding: 0!important;
+  text-indent: -999em;
+  float: left;
+  position: relative;
+  z-index: 10;
+  background: transparent!important;
+  cursor: pointer;
+}
+
+ .stars span {
+  display: block;
+  width: 0;
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 30px;
+  background: url("images/stars.png") repeat-x 0 -60px;
+  -webkit-transition: -webkit-width 0.5s;
+  -moz-transition: -moz-width 0.5s;
+  -ms-transition: -ms-width 0.5s;
+  -o-transition: -o-width 0.5s;
+  transition: width 0.5s;
+}
+/****************************STARS CSS END ******************************/
+.reports-page {
+	padding:10px !important;
+}
+
+#reports-tab .link {
+			        color: #E5B467 !important;
+			        font-weight: bold !important;
+	    	    }
+	    	    #demo .link {
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 0px;
+    border: solid 1px #20538D;
+    background: #FFF;
+    border-radius: 0px;
+    border: 1px solid #20538D;
+    /* background: #FFF none repeat scroll 0% 0%; */
+    color: #2E8BC6;
+    padding: 8px 10px;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 5px 1px;
+}
+.title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #286090;
+    text-align: right;
+    padding-right: 10px;
+    line-height: 25px;
+}
+.cvalue {
+color: #AD7E49 !important;
+font-weight: bold;
+line-height: 25px;
+}
+.content {
+    border: 1px solid #CCC;
+    border-radius: 5px;
+}

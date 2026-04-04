@@ -1,0 +1,610 @@
+    #current-activity{
+
+    }
+   
+    
+    #fil{
+        vertical-align: middle;
+        border: 0px none;
+        margin-left: 6%;
+
+    }
+    #stu-section{
+        width: 40% !important;
+        height: 25px !important;
+        margin-left: 5%;
+
+    }
+    #refresh{
+        vertical-align: middle;
+        border: 0px none;
+        margin-left: 6%;
+        cursor: pointer;
+
+    }
+    #filter{
+        vertical-align: middle;
+        border: 0px none;
+        margin-left: 6%;
+    }
+    #log{
+        float:left;
+    }
+
+.actype{
+    font-size: 9px !important;
+    font-weight: normal;
+    line-height: 12px;
+    text-align: center;
+}
+    #refresh-status{
+        margin-top: 0;
+    }
+
+   #action-menu-0-menu > li:nth-child(3){
+        display: none !important;
+    }
+    .rstatus{
+        color:green;font-weight:bold;
+    }
+    /*.refresh-icons{
+        float: left; width: 80%;font-size: 10px;
+    }*/
+    .refresh-icons-half1{
+        width: 60% ;float: left;
+    }
+    .refresh-icons-half2{
+        width: 40% ;float: left;padding-top: 5px;
+    }
+    #reset-logins{
+        cursor: pointer;margin-top: 5px;
+        background-color: #C64F46;color:#FFFFFF;
+        text-shadow: none;
+    }
+    .arrow{
+        -ms-transform: rotate(180deg); /* IE 9 */
+        -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+        transform: rotate(180deg);
+    }
+
+    #coursename {
+        width:50% !important;
+        float:left;
+        height: 35px !important;
+        margin-top: 0px;
+        padding-top: 0px;
+        font-size: 16px !important;
+        font-weight: bold;
+        line-height: 20px !important;
+    }
+    #topicname {
+        width:50% !important;
+        float:left;
+        margin-top: 0px !important;
+        padding-top: 0px !important;
+    }
+
+
+.page-context-header.container{
+display:none;
+}
+.progress-bar{
+background-image:none !important;
+}
+/*table{
+margin-top:20px !important;
+
+}*/
+table tbody{
+font-size:12px;
+font-weight:normal;
+}
+.tab-content{
+/*
+border: 2px solid #e2e2e2 !important;
+position: relative !important;
+top: -2px !important;
+padding-top: 20px !important;
+padding-bottom: 20px !important;
+padding-left: 20px !important;
+padding-right: 20px !important;
+margin-bottom:10px !important;
+overflow:auto;
+*/
+}
+
+
+
+.tleft{ float:left;width:49.5%;height:130px;}
+		.tright{ /*overflow-y: scroll; */}
+		.sta{border:1px solid gray;  margin-top:10px;float:left;width:100%;height:75px;}
+		.sub{
+            width: 23%;
+            border-right: 1px solid #808080;
+			padding: 15px 10px;
+			font-size: 16px;
+			float: left;
+			height: 45px;
+
+		}
+		.subp{margin-top:5px;font-size: 16px;padding-top: 0px;}
+		.subp2{margin-top:2px;font-size: 14px;}
+		.report{border: 1px solid #808080;
+			margin-top: 3px;
+			padding: 0px;
+			float: right;
+			width: 100%;}
+        .con{width:100%;}
+
+        .container-demo{
+            width: 1170px;margin-right: auto;margin-left: auto;
+        }
+
+
+        .repo{margin-top:10px;width:100%;height:auto;float:left;padding-top:10px;}
+		#panel, #flip {
+			padding: 5px;
+			text-align: center
+		}
+		p, fieldset, table, pre {
+            margin-bottom: 0em !important;
+		}
+
+		meter {
+            font-size: 6px;
+			margin-top: 5px;
+			width: 85%;
+		}
+		#flip{
+			color: #FFF;
+			text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.25);
+			background-color: #048EC7;
+			background-image: linear-gradient(to bottom, #049CDB, #0378A9);
+			background-repeat: repeat-x;
+			border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+			text-align: center;
+			border-width: 0px 0px 1px 1px;
+			font-size: 15px;
+			font-family: Arial;
+			font-weight: bold;
+			color: #FFF;
+			cursor: pointer;
+		}
+
+		#fl{
+			text-align:right;padding-right:20px;margin-top:5px
+		}
+		.fa-angle-double-up,.fa-angle-double-down{
+            font-size:18px;
+		}
+		#ccourse{
+			float:left;margin-right:180px;margin-left:40px;
+		}
+		#ctopic{
+			float:left;margin-right:180px;
+		}
+		#cactivity{
+			float:left;margin-right:180px;
+		}
+		#panel {
+			display: block;
+		}
+
+		
+
+
+		#progressBar {
+			width: 400px;
+			height: 22px;
+			border: 1px solid #111;
+			background-color: #292929;
+		}
+		#progressBar div {
+			height: 100%;
+			color: #fff;
+			text-align: right;
+			line-height: 22px; /* same as #progressBar height if we want text middle aligned */
+			width: 0;
+			background-color: #0099ff;
+		}
+		
+        tbody tr td:first-child{
+            text-align: center;
+        }
+            tbody tr td:last-child{
+        text-align: center;
+            }
+            tbody tr th:first-child{
+        text-align: center !important;
+            }
+            tbody tr th:last-child{
+        text-align: center !important;
+            }
+
+            .navbar {
+        margin-bottom: 0px;
+            }
+            thead{
+        cursor: pointer;
+    }
+            td{height: 30px;}
+        #t01 img{
+        padding:5px;
+        }
+        .sta {
+            border: 1px solid #808080;
+            margin-top: 0px;
+            float: left;
+            width: 100%;
+            height: 45px;
+        }
+        .sub {
+            width: 23%;
+            border-right: 1px solid #808080;
+            padding: 2px 10px;
+            font-size: 16px;
+            float: left;
+            height: 42px;
+        }
+         .repo {
+            margin-top: 0px;
+            width: 100%;
+            height: auto;
+            float: left;
+            padding-top: 5px;
+        }
+        .report {
+            border: 1px solid #808080;
+            margin-top: 3px;
+            padding: 0px;
+            float: right;
+            width: 100%;
+            height: 750px;
+            margin-bottom: 30px;
+        }
+        #fl{
+        height:20px;
+        }
+        .showhide{
+            border: none;
+            background: none;
+            cursor: pointer;
+	    cursor: not-allowed;
+border: 2px solid transparent;
+border-radius: 0px !important;
+outline: medium none !important;
+box-shadow: none !important;
+background-repeat:none !important;
+font-weight: bold;
+text-shadow: none;
+        }
+	.pagecover-onload{
+	    display: none; position: absolute; width: 95%; background-color: rgb(255, 255, 255); z-index: 300; opacity: 0.9; height: 800px; top: 60px;margin-left: -10px;
+	}
+.pagecover{
+	    display: none;
+}
+.watchlist {
+    cursor: pointer;
+}
+
+#current-activity{
+font-weight:bold;
+}
+
+/*#current-activity {
+  animation: blinker 2.7s cubic-bezier(.5, 0, 1, 1) infinite alternate;
+}
+@keyframes blinker {  
+  from { opacity: 1; }
+  to { opacity: 0; }
+}*/
+
+
+/* Test Center Css */
+		.sta {
+			margin:5px;
+			border:0px;
+		}
+		
+		.sub {
+			border: 1px solid  #CDCDCD ;
+		}
+		#show {
+			background: transparent;
+			background-image: none;
+			background-repeat: repeat-x;
+		}
+table{width:100%;}
+
+		.container, .navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
+			width: 100% !important;
+		}
+		.tleft {
+			float: left;
+			height:auto;
+			width: 30%;
+		}
+		.tright {
+
+			/*overflow-y: scroll;*/
+			height: auto;
+
+		}
+		.report {
+			border: 0px solid #808080;
+			margin-top: 3px;
+			padding: 0px;
+			float: right;
+			width: 100%;
+			height: auto;
+			margin-bottom: 30px;
+		}
+		#stu-section{
+			width: 100px !important;
+			margin-bottom: 0px !important;
+		}
+
+
+		.sub{
+			width:10% !important;
+		}
+
+		#show{
+			background-color: rgb(70, 165, 70);
+			color: #FFF;
+			font-size: 12px;
+			padding: 2px 20px;
+			display: inline-block;
+			float: left;
+			width:45%;margin-left: 2%;
+		}
+		#hide{
+			color: #FFF;
+			display: inline-block;
+			font-size: 12px;
+			padding: 2px 20px;
+			float: left;
+			background-color: rgb(157, 38, 29);
+			width:45%;margin-left: 4%;
+		}
+		#complete{
+			background-color:red;
+			color:#FFF;
+		}
+		.stopclose{
+			background-color: red;color: rgb(255, 255, 255); display: inline-block; font-size: 12px; padding: 2px 20px; float: left; margin-left: 8%;
+cursor: not-allowed;
+border: 2px solid transparent;
+border-radius: 0px !important;
+outline: medium none !important;
+box-shadow: none !important;background-repeat:none !important;
+font-weight: bold;
+text-shadow: none;
+		}
+		.stopclose:hover{background-color: red;}
+		.showhide:hover{
+			color:#fff;
+		}
+		#titile-sta{
+			text-align: center ! important; float: left;width: 95%;
+		}
+		input[type:"button"]:hover, input[type:"button"]:focus{
+															-moz-border-bottom-colors: none;
+															-moz-border-left-colors: none;
+															-moz-border-right-colors: none;
+															-moz-border-top-colors: none;
+															background-color: #F5F5F5;
+															background-image: linear-gradient(to bottom, #FFF, #E6E6E6);
+															background-repeat: repeat-x;
+															border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) #B3B3B3;
+															border-image: none;
+
+														}
+		.tleft{
+			width:29% !important;
+		}
+		#panel{
+			height:auto;
+		}
+		#stas{
+			/*margin:5px 5px 5px 5px;*/
+			width:99%;
+		}
+		#coursename{
+			width: 100%; height: 75px;
+			border: 0px solid rgb(243, 240, 240);
+			background-color: rgb(118, 139, 149);
+			box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.6);
+			font-size: 24px; font-weight: bold;
+			color: white; vertical-align: middle; line-height: 75px;
+		}
+		#topicname{
+			margin-top: 5px;
+			width: 100%;
+			height: 35px; border: 0px solid rgb(243, 240, 240);
+			background-color: rgb(118, 139, 149);
+			box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.6);
+			font-size: 16px; font-weight: bold;
+			color: white; vertical-align: middle;
+			padding-top: 4px;
+		}
+		#fl{
+			height: 16px !important;
+			line-height: 16px !important;
+			vertical-align: middle !important;
+			margin-top:0px !important;
+		}
+		#fil{
+			color: #000 !important;
+			background-color: white !important;
+		}
+		#ref{
+			vertical-align: middle;
+			width: 21%;
+			color: #787676 !important;
+			background-color: #FFF !important;
+		}
+		.status-text{
+			display: block; font-size: 9px ! important; text-align: center; font-weight: normal;line-height: 12px;
+		}
+
+		button.disabled,
+		input.form-submit.disabled, input.disabled[type="button"],
+		input.disabled[type="submit"], input.disabled[type="reset"], button[disabled],
+		input.form-submit[disabled], input[type="button"][disabled], input[type="submit"][disabled],
+		input[type="reset"][disabled] {
+			box-shadow: none;
+			opacity: 0.25 !important;
+			background-image:none !important;
+		}
+
+		button, input.form-submit, input[type="button"], input[type="submit"], input[type="reset"] {
+			background-image:none !important;
+		}
+
+		.activity-status-img{
+			margin-right: 5px;
+			padding-bottom: 2px;
+			width: 10px;
+		}
+		#warn-msg{
+			font-size: 8px;
+			display: block;
+			margin-top: 10px;
+		}
+
+		/*tabs css*/
+
+		
+		
+
+		#bar{
+			margin-top: 2px;border:0px;		}
+		#bar .tright{
+			margin-top: 10px;width:100%; !important;
+		}
+		.stopped{
+			color:rgb(157, 38, 29);
+		}
+		.started{
+			color:rgb(70, 165, 70);
+		}
+		.closed{
+			color:black;
+		}
+		.current-progress {
+
+			font-weight: bold;
+			color:#A17C43;
+			float: left;
+			padding-left: 2%;
+			width: 100%;
+		}
+
+		#current-activity{
+			display:none;
+		}
+		.act-refresh{
+			cursor: pointer;
+		}
+		#page-content {
+			margin-bottom: 40px;
+			margin-top: 5px;
+		}
+
+		#panel .tright{
+			width: 100%;
+		}
+		.course-topic{
+			text-align: right;
+			margin-right: 20px;
+			font-weight: bold;
+			color: #FFFFFF;
+			font-size: 10px;
+			margin-top: -5px;
+		}
+		.course-topic span{
+			background-color: #252525;
+			border-radius: 5px;
+			padding: 5px;
+		}
+		.current-progress{
+			background-color: #252525;
+			padding: 1px;color:#FFFFFF;
+		}
+
+		.current-progress-div{
+			font-weight: bold;
+			background-color: #c5c5c5; padding: 4px;height: 29px;
+			text-align: center;
+			margin-top: 3px;
+
+		}
+		.status-info {
+			height: 40px;
+			width: 100%;
+		}
+		.control-panel{
+			float: right;
+			margin-right: 10px;
+		}
+		.control-panel-text{
+			cursor:pointer;
+		}
+		#ctrl-panel{
+			font-size: 9px;
+			font-weight:bold;
+			cursor: pointer;
+		}
+		#greenstar_sub_list{
+			position: absolute;
+		}
+		
+		.arrow-symbol{
+			cursor: pointer;
+		}
+		/*end tabs css*/
+		#status-div{
+			margin-top: 15px;
+		}
+		#reset-logins{
+margin-top:1.6em;		
+		}
+#stas {
+	/*margin: 5px 5px 5px 24px;*/
+	
+}
+.tab-content{
+	border: 1px solid #ddd;
+	padding: 10px;top: 0px;
+}
+
+	#stas th {
+		border: 1px solid #ddd;
+		padding: 15px 5px;
+	}
+
+
+
+	#region-main > div {
+		min-height: 525px;
+		height:auto;
+		overflow: hidden;
+	}
+
+/*#sub_list thead {
+  width: 97%;
+}
+#sub_list tbody {
+  height: 230px;
+  overflow-y: auto;
+  width: 100%;
+}
+#sub_list thead,#sub_list tbody,#sub_list tr,#sub_list td,#sub_list th {
+  
+}
+ #sub_list tbody td,#sub_list thead > tr> th {
+  float: left;
+  border-bottom-width: 0;
+}*/

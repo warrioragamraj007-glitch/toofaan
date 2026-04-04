@@ -1,0 +1,1742 @@
+{{!
+    This file is part of Moodle - [http://moodle.org/](http://moodle.org/)
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template core/loginform
+    Professional Enhanced Moodle Login Template with Modern Design
+}}
+<div class="loginform-wrapper">
+    <div class="loginform-container">
+        {{#logourl}}
+            <div id="loginlogo" class="login-logo-container">
+                <div class="logo-frame">
+                    <img id="logoimage" src="{{logourl}}" class="logo-image" alt="{{sitename}}"/>
+                </div>
+                <h1 class="login-heading-logo sr-only">{{#str}} loginto, core, {{sitename}} {{/str}}</h1>
+                <div class="login-logo-help">
+  <a href="/EnableCamera.pdf" target="_blank" class="help-icon-link" aria-label="Help">
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+      <circle cx="14" cy="14" r="13" stroke="#c3cbe7" stroke-width="2"/>
+      <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" font-size="16" fill="#21264e">?</text>
+    </svg>
+    <span class="help-tooltip">Help</span>
+  </a>
+  
+</div>
+            </div>
+        {{/logourl}}
+        {{^logourl}}
+            <div class="login-header">
+                <h1 class="login-heading-main">{{#str}} loginto, core, {{sitename}} {{/str}}</h1>
+                <p class="login-subtitle">Secure access to your learning environment</p>
+            </div>
+        {{/logourl}}
+        
+        {{#maintenance}}
+            <div class="alert alert-maintenance">
+                <div class="alert-icon">⚠️</div>
+                <div class="alert-content">{{{maintenance}}}</div>
+            </div>
+        {{/maintenance}}
+        
+        {{#error}}
+            <a href="#" id="loginerrormessage" class="sr-only">{{error}}</a>
+            <div class="alert alert-error" role="alert">
+                <div class="alert-icon">❌</div>
+                <div class="alert-content">{{error}}</div>
+            </div>
+        {{/error}}
+        
+        {{#cansignup}}
+            <a href="{{signupurl}}" class="sr-only">{{#str}} tocreatenewaccount {{/str}}</a>
+        {{/cansignup}}
+
+        <div class="login-card">
+            <div class="auth-tabs-container">
+                <ul class="auth-tabs" id="loginTabs" role="tablist">
+                    <li class="tab-item">
+                        <a class="tab-link" id="standard-login-tab" data-bs-toggle="tab" href="#standard-login" role="tab" aria-controls="standard-login" aria-selected="true">
+                            <div class="tab-icon">🔑</div>
+                            <span class="tab-text">Password Login</span>
+                        </a>
+                    </li>
+                    <li class="tab-item">
+                        <a class="tab-link active" id="face-login-tab" data-bs-toggle="tab" href="#face-login" role="tab" aria-controls="face-login" aria-selected="false">
+                            <div class="tab-icon">👤</div>
+                            <span class="tab-text">Face Login</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="tab-content-container" id="loginTabsContent">
+                <div class="tab-pane fade" id="standard-login" role="tabpanel" aria-labelledby="standard-login-tab">
+                    <div class="standard-login-content">
+                        <div class="form-header">
+                            <h2 class="form-title">Welcome Back</h2>
+                            <p class="form-description">Please sign in to your account</p>
+                        </div>
+                        
+                        <form class="professional-form" action="{{loginurl}}" method="post" id="login">
+                            <input id="anchor" type="hidden" name="anchor" value="">
+                            <script>document.getElementById('anchor').value = location.hash;</script>
+                            <input type="hidden" name="logintoken" value="{{logintoken}}">
+                            
+                            <div class="form-group">
+                                <label for="username" class="form-label">
+                                    {{^canloginbyemail}}
+                                        {{#str}} username {{/str}}
+                                    {{/canloginbyemail}}
+                                    {{#canloginbyemail}}
+                                        {{#str}} usernameemail {{/str}}
+                                    {{/canloginbyemail}}
+                                </label>
+                                <div class="input-wrapper">
+                                    <div class="input-icon">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                            <circle cx="12" cy="7" r="4"></circle>
+                                        </svg>
+                                    </div>
+                                    <input type="text" name="username" id="username" class="form-input" value="{{username}}" placeholder="{{^canloginbyemail}}{{#cleanstr}}username{{/cleanstr}}{{/canloginbyemail}}{{#canloginbyemail}}{{#cleanstr}}usernameemail{{/cleanstr}}{{/canloginbyemail}}" autocomplete="username">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="password" class="form-label">{{#str}} password {{/str}}</label>
+                                <div class="input-wrapper">
+                                    <div class="input-icon">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                            <circle cx="12" cy="16" r="1"></circle>
+                                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                        </svg>
+                                    </div>
+                                    <input type="password" name="password" id="password" value="" class="form-input" placeholder="{{#cleanstr}}password{{/cleanstr}}" autocomplete="current-password">
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button class="btn-primary-large" type="submit" id="loginbtn">
+                                    <span class="btn-text">{{#str}}login{{/str}}</span>
+                                    
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="tab-pane fade show active" id="face-login" role="tabpanel" aria-labelledby="face-login-tab">
+                    <div class="face-login-container">
+                        <!--<div class="form-header">
+                            <h2 class="form-title">Face Authentication</h2>
+                            <p class="form-description">Position your face in the center of the circle</p>
+                        </div>-->
+                        
+                        <div class="face-capture-section">
+                            <div class="camera-container">
+                                <div class="camera-status-bar" id="cameraStatus">
+                                    <div class="status-indicator"></div>
+                                    <span class="status-text">Camera ready</span>
+                                </div>
+                                <div class="camera-frame">
+                                    <div class="circular-video-container">
+                                        <video id="video" autoplay muted playsinline></video>
+                                        <div class="camera-overlay">
+                                            <div class="scanning-ring"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="message1" class="message-container"></div>
+                               
+                            </div>
+                            
+                        </div>
+                        
+                        <canvas id="canvas" width="400" height="400"></canvas>
+                        
+                        <div class="face-login-form">
+                            <div class="form-group">
+                                <label for="username1" class="form-label">Username</label>
+                                <div class="input-wrapper">
+                                    <div class="input-icon">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                            <circle cx="12" cy="7" r="4"></circle>
+                                        </svg>
+                                    </div>
+                                    <input type="text" id="username1" placeholder="Enter your username" class="form-input">
+                                </div>
+                            </div>
+                            
+                            <button class="btn-biometric" id="captureAndLogin">
+                                <div class="btn-icon-left">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                                        <circle cx="12" cy="13" r="4"></circle>
+                                    </svg>
+                                </div>
+                                <span class="btn-text">Authenticate with Face</span>
+                               
+                                <div class="btn-loading">
+                                    <div class="spinner"></div>
+                                </div>
+                            </button>
+                            
+                            
+                            <center> <a href="/EnableCamera.pdf" target="_blank"><b>User Help Doc</b></a></center>
+                        </div>
+                         <div class="biometric-loader" id="loader">
+                                    <div class="loader-animation">
+                                        <div class="loader-circle"></div>
+                                        <div class="loader-circle"></div>
+                                        <div class="loader-circle"></div>
+                                    </div>
+                                    <span class="loader-text">Processing biometric data...</span>
+                                </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+
+.login-logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Make help icon absolutely positioned in top right corner of the container */
+.login-logo-help {
+  position: absolute;
+  top: 3px;
+  right: 8px;
+}
+
+.help-icon-link {
+  width: 38px;
+  height: 38px;
+  background: #fff;
+  border: 2px solid #e7eaf5;
+  border-radius: 50%;
+  box-shadow: 0 3px 14px rgba(65,94,155,.09);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none;
+  position: relative;
+  transition: box-shadow .13s, border-color .13s;
+}
+
+/* Use black for circle and "?" */
+.help-icon-link svg circle { stroke: #111 !important; }
+.help-icon-link svg text { fill: #111 !important; }
+
+.help-icon-link:hover {
+  border-color: #111;
+  box-shadow: 0 5px 20px rgba(35,40,65,0.17);
+}
+
+/* Tooltip styles */
+.help-tooltip {
+  display: none;
+  position: absolute;
+  right: 50%; /* shifts tooltip inside icon edge */
+  top: -32px;
+  transform: translateX(50%);
+  background: #222;
+  color: #fff;
+  border-radius: 6px;
+  padding: 3px 13px;
+  font-size: 1.05em;
+  white-space: nowrap;
+  box-shadow: 0 2px 12px #1112;
+  z-index: 30;
+  pointer-events: none;
+}
+
+.help-icon-link:hover .help-tooltip {
+  display: block;
+}
+
+/* ==========================================================================
+   PROFESSIONAL ENHANCED LOGIN INTERFACE
+   ========================================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+.loginform-wrapper {
+   
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.loginform-container {
+    width: 100%;
+    max-width: 480px;
+    position: relative;
+}
+
+/* ==========================================================================
+   PROFESSIONAL LOGO STYLING
+   ========================================================================== */
+
+.login-logo-container {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.logo-frame {
+    display: inline-block;
+    
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 24px;
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.08),
+        0 4px 12px rgba(0, 0, 0, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    position: relative;
+    overflow: hidden;
+}
+
+.logo-frame::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    animation: logoShine 3s ease-in-out infinite;
+}
+
+.logo-image {
+    max-width: 210px;
+    max-height: 100px;
+    display: block;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
+    transition: all 0.3s ease;
+}
+
+.logo-image:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.15));
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 32px;
+    padding: 32px 24px;
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.login-heading-main {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0 0 8px 0;
+}
+
+.login-subtitle {
+    font-size: 16px;
+    color: #64748b;
+    margin: 0;
+    font-weight: 400;
+}
+
+/* ==========================================================================
+   PROFESSIONAL ALERT STYLING
+   ========================================================================== */
+
+.alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px 20px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    backdrop-filter: blur(20px);
+    border: 1px solid;
+    font-weight: 500;
+}
+
+.alert-maintenance {
+    background: rgba(251, 191, 36, 0.15);
+    border-color: rgba(251, 191, 36, 0.3);
+    color: #92400e;
+}
+
+.alert-error {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: #dc2626;
+}
+
+.alert-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.alert-content {
+    flex: 1;
+    line-height: 1.5;
+}
+
+/* ==========================================================================
+   MAIN LOGIN CARD
+   ========================================================================== */
+
+.login-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 24px;
+    box-shadow: 
+        0 32px 80px rgba(0, 0, 0, 0.2),
+        0 16px 40px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+    position: relative;
+}
+
+.login-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #3b82f6, #1d4ed8, #06b6d4);
+}
+
+/* ==========================================================================
+   PROFESSIONAL TAB STYLING
+   ========================================================================== */
+
+.auth-tabs-container {
+    padding: 16px 20px 0 20px;
+}
+
+.auth-tabs {
+    display: flex;
+    background: #f8fafc;
+    border-radius: 16px;
+    padding: 6px;
+    margin: 0;
+    list-style: none;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+}
+
+.tab-item {
+    flex: 1;
+}
+
+.tab-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0px;
+    padding: 8px 12px;
+    text-decoration: none;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    color: #64748b;
+    font-weight: 600;
+}
+
+.tab-link:hover {
+    color: #475569;
+    text-decoration: none;
+}
+
+.tab-link.active {
+    background: linear-gradient(135deg, #5d9dff 0%, #9eb6ff 100%);
+    color: #ffffff;
+    box-shadow: 
+        0 8px 24px rgba(59, 130, 246, 0.3),
+        0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.tab-icon {
+    font-size: 20px;
+    transition: transform 0.3s ease;
+}
+
+.tab-link.active .tab-icon {
+    transform: scale(1.1);
+}
+
+.tab-text {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   TAB CONTENT CONTAINER
+   ========================================================================== */
+
+.tab-content-container {
+    padding: 16px 20px 16px 20px;
+    min-height: 280px; /* Much more compact height */
+}
+
+.tab-pane {
+    display: none;
+}
+
+.tab-pane.show.active {
+    display: block;
+    animation: fadeInUp 0.4s ease;
+}
+
+/* ==========================================================================
+   FORM STYLING
+   ========================================================================== */
+
+.form-header {
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.form-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0 0 4px 0;
+}
+
+.form-description {
+    font-size: 13px;
+    color: #64748b;
+    margin: 0;
+    font-weight: 400;
+}
+
+.professional-form {
+    max-width: none;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 8px;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+    z-index: 2;
+    transition: color 0.3s ease;
+}
+
+.form-input {
+    width: 100%;
+    padding: 16px 16px 16px 52px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    background: #ffffff;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 
+        0 0 0 3px rgba(102, 126, 234, 0.1),
+        0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+}
+
+.form-input:focus + .input-icon,
+.input-wrapper:focus-within .input-icon {
+    color: #667eea;
+}
+
+/* ==========================================================================
+   BUTTON STYLING
+   ========================================================================== */
+
+.form-actions {
+    margin-bottom: 24px;
+}
+
+.btn-primary-large {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 18px 24px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 12px;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+        0 8px 24px rgba(102, 126, 234, 0.3),
+        0 4px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary-large::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.btn-primary-large:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 12px 32px rgba(102, 126, 234, 0.4),
+        0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary-large:hover::before {
+    left: 100%;
+}
+
+.btn-primary-large:active {
+    transform: translateY(0);
+}
+
+.btn-biometric {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 18px 24px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    border: none;
+    border-radius: 12px;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+        0 8px 24px rgba(16, 185, 129, 0.3),
+        0 4px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-biometric:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 12px 32px rgba(16, 185, 129, 0.4),
+        0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.btn-loading {
+    display: none;
+}
+
+.btn-biometric:disabled .btn-text,
+.btn-biometric:disabled .btn-icon-left {
+    display: none;
+}
+
+.btn-biometric:disabled .btn-loading {
+    display: block;
+}
+
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top: 2px solid #ffffff;
+    animation: spin 1s linear infinite;
+}
+
+/* ==========================================================================
+   ENHANCED CIRCULAR FACE AUTHENTICATION STYLING
+   ========================================================================== */
+
+.face-login-container {
+    max-width: none;
+}
+
+.face-capture-section {
+    margin-bottom: 12px;
+}
+
+.camera-container {
+    background: #f8fafc;
+    border-radius: 8px;
+    padding: 12px;
+    border: 1px solid #e2e8f0;
+    text-align: center;
+}
+
+.camera-status-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    padding: 8px 16px;
+    background: #fef3c7;
+    color: #92400e;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    border: 1px solid #fcd34d;
+}
+
+.camera-status-bar.ready {
+    background: #d1fae5;
+    color: #065f46;
+    border-color: #6ee7b7;
+}
+
+.camera-status-bar.error {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.2);
+}
+
+.status-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #3b82f6;
+    animation: pulse 2s infinite;
+}
+
+.camera-status-bar.ready .status-indicator {
+    background: #10b981;
+}
+
+.camera-status-bar.error .status-indicator {
+    background: #ef4444;
+}
+
+.status-text {
+    font-weight: 600;
+    font-size: 14px;
+    color: #374151;
+}
+
+.status-details {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.camera-frame {
+    position: relative;
+    display: inline-block;
+}
+
+/* CIRCULAR VIDEO CONTAINER - ENHANCED */
+.circular-video-container {
+    position: relative;
+    display: inline-block;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 240px;
+    height: 240px;
+    border: 4px solid #e5e7eb;
+    box-shadow: 
+        0 8px 24px rgba(0, 0, 0, 0.15),
+        0 4px 12px rgba(0, 0, 0, 0.1),
+        inset 0 2px 4px rgba(255, 255, 255, 0.8);
+    background: #f3f4f6;
+}
+
+/* ENHANCED CIRCULAR VIDEO STYLING */
+#video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scaleX(-1); /* Mirror effect */
+    border-radius: 50%;
+    background: #e5e7eb;
+}
+
+/* ENHANCED CAMERA OVERLAY */
+.camera-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    overflow: hidden;
+    border: 2px solid rgba(16, 185, 129, 0.4);
+}
+
+/* CIRCULAR SCANNING RING ANIMATION */
+.scanning-ring {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    right: 10%;
+    bottom: 10%;
+    border: 3px solid transparent;
+    border-top: 3px solid #10b981;
+    border-right: 3px solid rgba(16, 185, 129, 0.5);
+    border-radius: 50%;
+    animation: scanRotate 2s linear infinite;
+}
+
+.scanning-ring::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 50%;
+    animation: scanPulse 2s ease-in-out infinite;
+}
+
+.face-login-form {
+    margin-top: 12px;
+}
+
+#canvas {
+    display: none;
+}
+
+/* ==========================================================================
+   MESSAGE AND LOADER STYLING
+   ========================================================================== */
+
+.message-container {
+    min-height: 32px;
+    margin-top: 16px;
+}
+
+.message-container p {
+    margin: 0;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    animation: slideIn 0.3s ease;
+}
+
+.biometric-loader {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin: 24px 0;
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+}
+
+.biometric-loader.active {
+    display: flex;
+}
+
+.loader-animation {
+    display: flex;
+    gap: 8px;
+}
+
+.loader-circle {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #667eea;
+    animation: bounce 1.4s ease-in-out infinite both;
+}
+
+.loader-circle:nth-child(1) { animation-delay: -0.32s; }
+.loader-circle:nth-child(2) { animation-delay: -0.16s; }
+
+.loader-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+}
+
+.login-container{
+    padding:2rem !important;
+}
+
+/* ==========================================================================
+   FOOTER LINKS
+   ========================================================================== */
+
+.form-footer {
+    text-align: center;
+}
+
+.forgot-password-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #667eea;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.forgot-password-link:hover {
+    color: #5a67d8;
+}
+
+.forgot-password-link svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* ==========================================================================
+   ENHANCED ANIMATIONS
+   ========================================================================== */
+
+@keyframes logoShine {
+    0% { left: -100%; }
+    50% { left: 100%; }
+    100% { left: 100%; }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scanRotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes scanPulse {
+    0%, 100% { 
+        opacity: 0.3; 
+        transform: scale(1); 
+    }
+    50% { 
+        opacity: 0.8; 
+        transform: scale(1.05); 
+    }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+@keyframes bounce {
+    0%, 80%, 100% {
+        transform: scale(0);
+    }
+    40% {
+        transform: scale(1);
+    }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+/* ==========================================================================
+   SUCCESS AND ERROR MESSAGE STYLING
+   ========================================================================== */
+
+.success-message {
+    background: rgba(16, 185, 129, 0.1) !important;
+    color: #065f46 !important;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.success-message::before {
+    content: '✅';
+}
+
+.error-message {
+    background: rgba(239, 68, 68, 0.1) !important;
+    color: #dc2626 !important;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.error-message::before {
+    content: '❌';
+}
+
+.info-message {
+    background: rgba(59, 130, 246, 0.1) !important;
+    color: #1d4ed8 !important;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.info-message::before {
+    content: 'ℹ️';
+}
+
+.warning-message {
+    background: rgba(251, 191, 36, 0.1) !important;
+    color: #92400e !important;
+    border: 1px solid rgba(251, 191, 36, 0.2);
+}
+
+.warning-message::before {
+    content: '⚠️';
+}
+
+/* ==========================================================================
+   ENHANCED RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .loginform-container {
+        margin: 16px;
+        max-width: none;
+    }
+    
+    .login-card {
+        border-radius: 16px;
+        box-shadow: 
+            0 16px 40px rgba(0, 0, 0, 0.15),
+            0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .logo-frame {
+        padding: 16px 20px;
+    }
+    
+    .logo-image {
+        max-width: 180px;
+        max-height: 80px;
+    }
+    
+    .form-title {
+        font-size: 20px;
+    }
+    
+    .auth-tabs {
+        flex-direction: column;
+        gap: 4px;
+    }
+    
+    .tab-link {
+        flex-direction: row;
+        padding: 12px 16px;
+        text-align: left;
+    }
+    
+    .tab-content-container {
+        padding: 20px 16px 24px 16px;
+        min-height: 320px;
+    }
+    
+    .circular-video-container {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .form-input {
+        font-size: 16px; /* Prevent zoom on iOS */
+    }
+}
+
+@media (max-width: 480px) {
+    .loginform-wrapper {
+        padding: 12px;
+    }
+    
+    .login-header {
+        padding: 24px 16px;
+        margin-bottom: 24px;
+    }
+    
+    .login-heading-main {
+        font-size: 24px;
+    }
+    
+    .login-subtitle {
+        font-size: 14px;
+    }
+    
+    .tab-content-container {
+        padding: 16px 12px 20px 12px;
+    }
+    
+    .circular-video-container {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .btn-primary-large,
+    .btn-biometric {
+        padding: 16px 20px;
+        font-size: 15px;
+    }
+    
+    .form-input {
+        padding: 14px 14px 14px 48px;
+    }
+    
+    .input-icon {
+        left: 14px;
+    }
+}
+
+/* ==========================================================================
+   ACCESSIBILITY ENHANCEMENTS
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .scanning-ring {
+        animation: none;
+        border-top-color: #10b981;
+    }
+}
+
+/* Focus indicators for keyboard navigation */
+.tab-link:focus {
+    outline: 2px solid #667eea;
+    outline-offset: 2px;
+}
+
+.form-input:focus {
+    outline: none; /* Custom focus styling already applied */
+}
+
+.btn-primary-large:focus,
+.btn-biometric:focus {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .login-card {
+        border: 2px solid #000000;
+        background: #ffffff;
+    }
+    
+    .form-input {
+        border: 2px solid #000000;
+    }
+    
+    .btn-primary-large {
+        background: #000000;
+        border: 2px solid #000000;
+    }
+    
+    .btn-biometric {
+        background: #006600;
+        border: 2px solid #000000;
+    }
+}
+
+/* ==========================================================================
+   PRINT STYLES
+   ========================================================================== */
+
+@media print {
+    .loginform-wrapper {
+        background: none;
+        padding: 0;
+    }
+    
+    .login-card {
+        box-shadow: none;
+        border: 1px solid #000000;
+        background: #ffffff;
+    }
+    
+    .face-capture-section,
+    .auth-tabs-container,
+    #face-login {
+        display: none !important;
+    }
+    
+    .btn-primary-large {
+        background: #ffffff !important;
+        color: #000000 !important;
+        border: 2px solid #000000 !important;
+    }
+}
+
+/* ==========================================================================
+   DARK MODE SUPPORT (if implemented in Moodle)
+   ========================================================================== */
+
+
+
+/* ==========================================================================
+   CUSTOM SCROLLBAR STYLING
+   ========================================================================== */
+
+.loginform-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.loginform-container::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.loginform-container::-webkit-scrollbar-thumb {
+    background: rgba(102, 126, 234, 0.3);
+    border-radius: 4px;
+}
+
+.loginform-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(102, 126, 234, 0.5);
+}
+
+/* ==========================================================================
+   UTILITY CLASSES
+   ========================================================================== */
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.fade {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.fade.show {
+    opacity: 1;
+}
+
+/* ==========================================================================
+   JAVASCRIPT REQUIRED STYLES
+   ========================================================================== */
+
+.js-loading .btn-text {
+    display: none;
+}
+
+.js-loading .btn-loading {
+    display: flex;
+}
+
+.js-success .camera-status-bar {
+    background: #d1fae5;
+    color: #065f46;
+    border-color: #6ee7b7;
+}
+
+.js-error .camera-status-bar {
+    background: rgba(239, 68, 68, 0.1);
+    color: #dc2626;
+    border-color: rgba(239, 68, 68, 0.2);
+}
+
+/* ==========================================================================
+   PERFORMANCE OPTIMIZATIONS
+   ========================================================================== */
+
+.login-card,
+.logo-frame,
+.form-input,
+.btn-primary-large,
+.btn-biometric {
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+.scanning-ring {
+    transform: translateZ(0);
+    will-change: transform;
+}
+</style>
+
+
+<script src='pram.js'></script>
+<script src='newfl.js'></script>
+
+
+
+
+<style>
+#faqHelpModal {
+  display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100vw; height: 100vh;
+  background: rgba(36,50,99,.14); backdrop-filter: blur(0.3px);
+}
+.faq-modal-content {
+  background: #fff;
+  margin: 2.7% auto 0 auto; border-radius: 21px;
+  max-width: 850px; width: 99vw;
+  box-shadow: 0 6px 40px 0 rgba(31,54,104,0.17),0 1.5px 7px 0 rgba(36,49,117,0.10);
+  font-family: inherit;
+  padding: 0; position: relative;
+  height: 82vh; display: flex; flex-direction: column;
+  border: 1.2px solid #e6eaf5;
+  transition: box-shadow .18s;
+}
+.faq-modal-header {
+  flex: 0 0 auto;
+  padding: 25px 36px 9px 36px;
+  border-bottom: 1px solid #ecf2f9;
+  position: sticky; top: 0; background: #fff; z-index: 1;
+}
+.faq-close-btn {
+  position: absolute; top: 21px; right: 30px; background: none; border: none;
+  cursor: pointer; color: grey; font-size: 2.0em; opacity: 0.82; padding: 2px 4px;
+  transition: background .14s, opacity .16s;
+}
+.faq-close-btn:active { background: #fadedf; }
+.faq-title { font-size: 1.34em; font-weight: 700; color: #2555b5; letter-spacing: .00em; margin-bottom:.29em;}
+.faq-desc { font-size: 1.03em; color: #88a; margin-bottom: 2px; }
+
+.faq-modal-footer {
+  flex: 0 0 auto;
+  border-top: 1px solid #ecf2f9;
+  background: #fafcff;
+  padding: 9px 28px 9px 22px;
+  position: sticky; bottom: 0; display: flex; justify-content: flex-end; align-items: center;
+  z-index: 1;
+}
+.faq-modal-footer button {
+  min-width: 69px;
+  border-radius: 7px; border: none; background: #0f6cbf;
+  color: white; font-weight: 500; font-size: 1em;
+  padding: 7px 17px; cursor: pointer; margin: 0;
+  box-shadow: 0 0.5px 0.8px #e3e9f3;
+  transition: background .15s;
+}
+.faq-modal-footer button:active { background: #e7eefb; }
+
+/* Scrollable FAQ */
+.faq-scroll-content {
+  flex: 1 1 auto; overflow-y: auto; padding: 9px 36px 8px 36px;
+}
+.faq-scroll-content::-webkit-scrollbar { width: 7px; background: #f7fbff; }
+.faq-scroll-content::-webkit-scrollbar-thumb { background: #eceffa; border-radius: 8px; }
+
+/* Accordion */
+.faq-question {
+  background: #f4f8ff;
+  cursor: pointer; border: none; outline: none;
+  padding: 16px 48px 16px 20px; width: 100%; text-align: left; font-size: 1.12em;
+  border-radius: 11px; margin-bottom: 11px; font-weight: 600; position: relative;
+  transition: background 0.13s;
+  box-shadow: 0 0 .5px #bcd0ef;
+}
+.faq-question:after {
+  content: "▼";
+  position: absolute; right: 22px; top: 18px; font-size: 15px; color: #81a1d0;
+  transition: transform 0.18s;
+}
+.faq-question.expanded:after { transform: rotate(180deg); }
+.faq-answer {
+  display: none;
+  background: #fafdff;
+  padding: 17px 18px 8px 21px;
+  border-radius: 0 0 10px 10px;
+  margin-bottom: 10px; font-size: 1.03em; border-left: 2.3px solid #3573df;
+  box-shadow: 0 0 1.5px #dbeaff;
+  color: #274050;
+}
+.faq-answer.visible { display: block; animation: fadein 0.19s; }
+@keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+.faq-answer code { background: #e7eefd; font-size: 0.99em; padding: 2px 8px; border-radius: 5px; }
+.faq-answer a { color: #3979cb; text-decoration: underline; word-break: break-word; }
+.faq-img-thumb {
+  cursor: pointer; display: inline-block; margin: 10px 0 4px 0;
+  border-radius: 8px; box-shadow: 0 1.5px 9px #efefef;
+  border: 1.5px solid #dae3ff; max-width: 98%; transition: box-shadow .16s;
+}
+.faq-img-thumb:hover { box-shadow: 0 6px 26px #e1eafc; }
+
+@media (max-width:960px) {
+ .faq-modal-content { max-width: 99vw !important; }
+}
+@media (max-width:700px) {
+  .faq-modal-header { padding-right: 4vw; padding-left: 4vw;}
+  .faq-scroll-content { padding-left: 4vw; padding-right: 4vw;}
+  .faq-modal-footer { padding-left: 1vw; padding-right: 1vw;}
+}
+@media (max-width:440px) {
+  .faq-modal-header, .faq-scroll-content { padding-left: 2vw; padding-right: 2vw;}
+}
+</style>
+
+<div id="faqHelpModal">
+  <div class="faq-modal-content">
+    <div class="faq-modal-header">
+      <div class="faq-title">Face Login Mandatory Settings</div>
+      <div class="faq-desc">Common issues and solutions for face recognition login</div>
+      <button class="faq-close-btn" id="faqModalClose" aria-label="Close">&times;</button>
+    </div>
+    <div class="faq-scroll-content">
+      <!-- First question answer visible by default -->
+      <div class="faq-answer visible">
+       Enable camera access for your TOOFAAN site:
+        <ol>
+           <li>Open your browser and In the <b>address bar, type or paste</b><br>
+            Chrome: <code>chrome://flags/#unsafely-treat-insecure-origin-as-secure</code><br>
+            Brave: <code>brave://flags/#unsafely-treat-insecure-origin-as-secure</code><br>
+            Edge: <code>edge://flags/#unsafely-treat-insecure-origin-as-secure</code>
+           <br><b> Press Enter </b>
+          </li>
+          <li>Find <b>Insecure origins treated as secure</b> and set to <b>Enabled</b>.</li>
+          <li>Add your college TOOFAAN IPs (comma-separated):<br> 
+            KMEC: <code>http://192.168.6.5:81,http://192.168.6.5</code><br>
+          </li>
+          <div style="margin-top:9px;">
+              <img src="/pix/kmec-ips.png" alt="Camera access screenshot" class="faq-img-thumb" onclick="showFaqImageModal('/pix/kmec-ips.png', 'Camera access screenshot')">
+            </div>
+          <li>Restart the browser, open the site, and click <b>Allow</b> for camera.</li>
+          <div style="margin-top:9px;">
+            <img src="/pix/allowcameraaccess.png" alt="Camera access screenshot" class="faq-img-thumb" onclick="showFaqImageModal('/pix/allowcameraaccess.png', 'Camera access screenshot')">
+          </div>
+        <li>If the camera is allowed but the preview is blank:
+    <ul>
+        <li>Go to Chrome → Settings → Privacy and Security → Site Settings → Camera</li>
+        <li>Select your working camera (Laptop/USB/Mobile webcam)</li>
+        <li>Refresh the TOOFAAN/Netra page and try again</li>
+    </ul>
+    <div style="margin-top:9px;">
+        <img src="/pix/set_laptop_integratedcamera_as_default_cam.png" alt="Select camera screenshot" class="faq-img-thumb" onclick="showFaqImageModal('/pix/set_laptop_integratedcamera_as_default_cam.png', 'Select camera screenshot')">
+    </div>
+</li>
+          <!-- Note Section -->
+<div class="note" style="margin-top:15px; padding:10px; background:#f5f5f5; border-left:4px solid #0073e6;">
+    <b>Note:</b>
+    <ul style="margin-top:8px;color:red">
+    <li>If you see a “Failed to fetch” error,check your Wi-Fi connection and make sure the device is connected to local network.</li>
+        <li>If you have not registered in Netra, please complete your face registration.</li>
+<li>If your face registration was rejected, please register again in Netra.</li>
+<li>If you are not able to log in to the Netra app, please contact your Netra/Trinetra administrator.</li>
+    </ul>
+</div>
+        </ol>
+      </div>
+
+      <button class="faq-question">Q: Camera allowed but preview is blank?</button>
+      <div class="faq-answer">
+        <ol>
+          <li>Go to Chrome Settings → Privacy and security → Site settings → <b>Camera</b>.</li>
+          <li>Choose correct camera (laptop/USB/mobile webcam) from dropdown.</li>
+          <li>Refresh the page and try again.</li>
+        </ol>
+      </div>
+
+      <button class="faq-question">Q: No record found. Your face is not yet registered?</button>
+      <div class="faq-answer">
+        <ul>
+          <li><b>Check your hall ticket number is entered correctly.</b></li>
+          <li>If correct, register your face with Netra (Face Registration), then try again in TOOFAAN.</li>
+        </ul>
+      </div>
+
+      <button class="faq-question">Q: Invalid image (lighting/pose)?</button>
+      <div class="faq-answer">
+        <ul>
+          <li>Sit in good, even lighting (no strong backlight).</li>
+          <li>Full face in frame, remove obstructions.</li>
+          <li>Look straight, clear view to camera and retry.</li>
+        </ul>
+      </div>
+
+      <button class="faq-question">Q: Matching percentage too low?</button>
+      <div class="faq-answer">
+        <ul>
+          <li>Sit closer so your face fills most of the frame.</li>
+          <li>No glare/bright reflections; keep head still during scanning.</li>
+          <li>If still &lt;65% in both Netra & TOOFAAN:
+            <ul>
+              <li>Contact mentor to reject registration, then re-register with good lighting.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <button class="faq-question">Q: Face registration rejected?</button>
+      <div class="faq-answer">
+        <ul>
+          <li>Log in to Netra again and re-register with good lighting and clear face pose.</li>
+          <li>Try face login in TOOFAAN.</li>
+        </ul>
+      </div>
+
+      <button class="faq-question">Q: Can't login to Netra app?</button>
+      <div class="faq-answer">
+        <ul>
+          <li>Contact your <b>Trinetra/Netra admin</b>.</li>
+          <li>Ask for credential reset, then log in with new username/password and complete registration.</li>
+        </ul>
+      </div>
+
+      <button class="faq-question">Q: Laptop camera not working?</button>
+      <div class="faq-answer">
+        <ul>
+          <li>Use mobile as webcam (<a href="https://www.dev47apps.com/" target="_blank">DroidCam</a>, <a href="https://iriun.com/" target="_blank">Iriun</a>) or plug in a USB webcam.</li>
+          <li>Select this camera in browser settings and retry.</li>
+        </ul>
+      </div>
+
+      <button class="faq-question">Q: TOOFAAN IP not opening?</button>
+      <div class="faq-answer">
+        <ul>
+          <li>Connect to college Wi-Fi with network access.</li>
+          <li>Check IP and port (e.g., <code>http://192.168.2.5:81</code>).</li>
+          <li>Try with <b>Google Chrome</b>.</li>
+          <li>If still not opening, contact lab admin/mentor.</li>
+        </ul>
+      </div>
+
+      <button class="faq-question">Q: Face login stuck or very slow?</button>
+      <div class="faq-answer">
+        <ul>
+          <li>Close other apps/tabs using the camera.</li>
+          <li>Check your network connection.</li>
+          <li>Refresh and retry. If many see slow/stuck, inform mentor/admin.</li>
+        </ul>
+      </div>
+
+      <button class="faq-question">Q: Which browser to use?</button>
+      <div class="faq-answer">
+        <ul>
+          <li><b>Google Chrome (latest)</b> is recommended.</li>
+          <li>If using Brave/Edge: enable "Insecure origins treated as secure" for your site.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="faq-modal-footer">
+      <button type="button" id="faqModalFooterClose">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ image popup overlay -->
+<div id="faqImgModal" style="display:none;position:fixed;z-index:10000;top:0;left:0;width:100vw;height:100vh;background:rgba(30,45,73,0.77);align-items:center;justify-content:center;">
+  <img id="faqImgModalImg" src="" alt="FAQ screenshot" style="max-width:96vw;max-height:85vh;border-radius:13px;box-shadow:0 3px 50px #232b47;">
+</div>
+<script>
+(function () {
+  const MODAL_ID = 'faqHelpModal';
+  const SCROLL_SELECTOR = '.faq-scroll-content';
+
+  function openFaqModal() {
+    const el = document.getElementById(MODAL_ID);
+    if (el) el.style.display = 'block';
+  }
+
+  function closeFaqModal() {
+    const el = document.getElementById(MODAL_ID);
+    if (el) el.style.display = 'none';
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    openFaqModal();
+
+    // Close buttons
+    const faqModalClose = document.getElementById('faqModalClose');
+    const faqModalFooterClose = document.getElementById('faqModalFooterClose');
+    if (faqModalClose) faqModalClose.onclick = closeFaqModal;
+    if (faqModalFooterClose) faqModalFooterClose.onclick = closeFaqModal;
+
+    const container = document.querySelector(SCROLL_SELECTOR);
+    if (!container) return;
+
+    // First static answer (your default visible block)
+    const firstAnswer = container.querySelector('.faq-answer.visible');
+
+    // Ensure container has position context
+    const cs = window.getComputedStyle(container);
+    if (cs.position === 'static') container.style.position = 'relative';
+
+    function offsetTopWithinContainer_usingOffset(el, container) {
+      let offset = 0;
+      let node = el;
+      while (node && node !== container && node.offsetParent) {
+        offset += node.offsetTop;
+        node = node.offsetParent;
+      }
+      return (node === container) ? offset : null;
+    }
+
+    function offsetTopWithinContainer_usingRects(el, container) {
+      const contRect = container.getBoundingClientRect();
+      const elRect = el.getBoundingClientRect();
+      return (elRect.top - contRect.top) + container.scrollTop;
+    }
+
+    function scrollToElementInside(container, element, padding = 12) {
+      if (!container || !element) return;
+      let top = offsetTopWithinContainer_usingOffset(element, container);
+      if (top === null) {
+        top = offsetTopWithinContainer_usingRects(element, container);
+      }
+      const target = Math.max(0, Math.floor(top - padding));
+      container.scrollTo({ top: target, behavior: 'smooth' });
+    }
+
+    // Initialize: any .faq-answer.visible that already exists
+    container.querySelectorAll('.faq-answer.visible').forEach(ans => {
+      const q = ans.previousElementSibling;
+      if (q && q.classList && q.classList.contains('faq-question')) {
+        q.classList.add('expanded');
+      }
+    });
+
+    // Handle clicks on questions
+    container.addEventListener('click', (e) => {
+      const btn = e.target.closest('.faq-question');
+      if (!btn) return;
+
+      e.preventDefault();
+
+      const isExpanded = btn.classList.contains('expanded');
+
+      // Collapse all dynamic answers
+      container.querySelectorAll('.faq-question').forEach(q => q.classList.remove('expanded'));
+      container.querySelectorAll('.faq-answer').forEach(a => {
+        // Keep the first default block always visible
+        if (a !== firstAnswer) a.classList.remove('visible');
+      });
+
+      // Always scroll such that the very top (firstAnswer) is in view
+      if (firstAnswer) {
+        scrollToElementInside(container, firstAnswer, 0);
+      } else {
+        container.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      if (!isExpanded) {
+        btn.classList.add('expanded');
+        const answer = btn.nextElementSibling;
+        if (answer && answer.classList && answer.classList.contains('faq-answer')) {
+          answer.classList.add('visible');
+
+          // After layout update, if needed, ensure the newly opened answer is visible
+          setTimeout(() => {
+            scrollToElementInside(container, answer, 8);
+          }, 160);
+        }
+      }
+    });
+
+    // Prevent image thumbs from toggling questions
+    container.querySelectorAll('.faq-img-thumb').forEach(img => {
+      img.addEventListener('click', (ev) => ev.stopPropagation());
+    });
+
+    // Image modal
+    window.showFaqImageModal = function (src, alt) {
+      const modal = document.getElementById('faqImgModal');
+      const img = document.getElementById('faqImgModalImg');
+      if (!modal || !img) return;
+      img.src = src;
+      img.alt = alt || 'FAQ screenshot';
+      modal.style.display = 'flex';
+      modal.onclick = function () {
+        modal.style.display = 'none';
+        img.src = '';
+      };
+    };
+  });
+})();
+</script>
+
+

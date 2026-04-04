@@ -1,0 +1,84 @@
+
+.tleft{
+
+    background-color: #c5c5c5;
+    padding: 10px;
+    background-color: rgb(204, 204, 204); padding: 10px;
+}
+.topicname {
+    width: 100%;
+    height: 35px;
+    background-color: #252525;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.6);
+    font-size: 16px;
+    font-weight: bold;
+    color: #FFF;
+    vertical-align: middle;
+    padding-top: 5px;
+    text-align: center;
+    margin-top: 5px;
+}
+.coursename {
+    min-height: 75px;
+    background-color: #252525;
+    color: #FFF;
+    text-align: center;
+    overflow-y: auto;
+}
+.coursename div{
+    position: relative;
+    top: 35%;
+    margin-top:10%;
+}
+
+.block{
+    display: flex;
+
+}
+
+.btn.pull-right{
+    text-transform:Uppercase !important;
+    float: right !important;
+    border: none;
+}
+
+.fa-check-circle-o {
+    color: #ea6645; /* Replace "your_desired_color" with the color you want */
+}
+
+
+.btn.btn-primary {
+    background-color: #ea6645;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 0;
+    outline: none !important;
+    border-radius: 0px !important;
+    border-color: #ea6645;
+   border: none;
+  
+
+}
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show>.btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #ea6645;
+    font-weight: bold;
+    border-radius: 0px;
+    box-shadow: none;
+    outline: none !important;
+    padding: 8px 18px;
+    border: 2px solid transparent !important;
+    min-height: 40px;
+    background-repeat: none !important;
+    user-select: none;
+    border-color: #ea6645;
+    
+    
+    
+
+    
+}
+.btn-primary:focus {
+    outline: none;
+}
+

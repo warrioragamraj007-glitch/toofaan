@@ -1,0 +1,287 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>New features</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="migration72.html">Migrating from PHP 7.1.x to PHP 7.2.x</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="migration72.new-functions.html">New functions</a></div>
+ <div class="up"><a href="migration72.html">Migrating from PHP 7.1.x to PHP 7.2.x</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="migration72.new-features" class="sect1">
+ <h2 class="title">New features</h2>
+
+ <div class="sect2" id="migration72.new-features.object-type">
+  <h3 class="title">New object type</h3>
+
+  <p class="para">
+   A new type, <span class="type"><a href="language.types.object.html" class="type object">object</a></span>, has been introduced that can be used for
+   (contravariant) parameter typing and (covariant) return typing of any
+   objects.
+  </p>
+
+  <div class="informalexample">
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">test</span><span style="color: #007700">(</span><span style="color: #0000BB">object&nbsp;$obj</span><span style="color: #007700">)&nbsp;:&nbsp;</span><span style="color: #0000BB">object<br /></span><span style="color: #007700">{<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;new&nbsp;</span><span style="color: #0000BB">SplQueue</span><span style="color: #007700">();<br />}<br /><br /></span><span style="color: #0000BB">test</span><span style="color: #007700">(new&nbsp;</span><span style="color: #0000BB">StdClass</span><span style="color: #007700">());</span>
+</span>
+</code></div>
+   </div>
+
+  </div>
+ </div>
+
+ <div class="sect2" id="migration72.new-features.ext-loading-by-name">
+  <h3 class="title">Extension loading by name</h3>
+
+  <p class="para">
+   Shared extensions no longer require their file extension
+   (<em>.so</em> for Unix or <em>.dll</em> for Windows) to
+   be specified. This is enabled in the php.ini file, as well as in the
+   <span class="function"><a href="function.dl.html" class="function">dl()</a></span> function.
+  </p>
+ </div>
+
+ <div class="sect2" id="migration72.new-features.abstract-method-overriding">
+  <h3 class="title">Allow abstract method overriding</h3>
+
+  <p class="para">
+   Abstract methods can now be overridden when an abstract class extends
+   another abstract class.
+  </p>
+
+  <div class="informalexample">
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">abstract&nbsp;class&nbsp;</span><span style="color: #0000BB">A<br /></span><span style="color: #007700">{<br />&nbsp;&nbsp;&nbsp;&nbsp;abstract&nbsp;function&nbsp;</span><span style="color: #0000BB">test</span><span style="color: #007700">(</span><span style="color: #0000BB">string&nbsp;$s</span><span style="color: #007700">);<br />}<br />abstract&nbsp;class&nbsp;</span><span style="color: #0000BB">B&nbsp;</span><span style="color: #007700">extends&nbsp;</span><span style="color: #0000BB">A<br /></span><span style="color: #007700">{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;overridden&nbsp;-&nbsp;still&nbsp;maintaining&nbsp;contravariance&nbsp;for&nbsp;parameters&nbsp;and&nbsp;covariance&nbsp;for&nbsp;return<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">abstract&nbsp;function&nbsp;</span><span style="color: #0000BB">test</span><span style="color: #007700">(</span><span style="color: #0000BB">$s</span><span style="color: #007700">)&nbsp;:&nbsp;</span><span style="color: #0000BB">int</span><span style="color: #007700">;<br />}</span>
+</span>
+</code></div>
+   </div>
+
+  </div>
+ </div>
+
+ <div class="sect2" id="migration72.new-features.pws-hashing-with-argon2">
+  <h3 class="title">Password hashing with Argon2</h3>
+
+  <p class="para">
+   Argon2 has been added to the password hashing API (the
+   <em>password_</em> functions), where the following constants have
+   been exposed:
+  </p>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <span class="simpara">
+     <strong><code>PASSWORD_ARGON2I</code></strong>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <strong><code>PASSWORD_ARGON2_DEFAULT_MEMORY_COST</code></strong>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <strong><code>PASSWORD_ARGON2_DEFAULT_TIME_COST</code></strong>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <strong><code>PASSWORD_ARGON2_DEFAULT_THREADS</code></strong>
+    </span>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration72.new-features.pdo-extended-str-types">
+  <h3 class="title">Extended string types for ext/PDO</h3>
+
+  <p class="para">
+   PDO&#039;s string type has been extended to support the national character type
+   when emulating prepares. This has been done with the following constants:
+  </p>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <span class="simpara">
+     <strong><code>PDO::PARAM_STR_NATL</code></strong>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <strong><code>PDO::PARAM_STR_CHAR</code></strong>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <strong><code>PDO::ATTR_DEFAULT_STR_PARAM</code></strong>
+    </span>
+   </li>
+  </ul>
+
+  <p class="para">
+   These constants are utilised by bitwise <em>OR</em>&#039;ing them with
+   <strong><code>PDO::PARAM_STR</code></strong>:
+  </p>
+
+  <div class="informalexample">
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br />$db</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">quote</span><span style="color: #007700">(</span><span style="color: #DD0000">'über'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">PDO</span><span style="color: #007700">::</span><span style="color: #0000BB">PARAM_STR&nbsp;</span><span style="color: #007700">|&nbsp;</span><span style="color: #0000BB">PDO</span><span style="color: #007700">::</span><span style="color: #0000BB">PARAM_STR_NATL</span><span style="color: #007700">);</span>
+</span>
+</code></div>
+   </div>
+
+  </div>
+ </div>
+
+ <div class="sect2" id="migration72.new-features.additional-emulated-prepares-debugging-info">
+  <h3 class="title">Additional emulated prepares debugging information for ext/PDO</h3>
+
+  <p class="para">
+   The <span class="function"><a href="pdostatement.debugdumpparams.html" class="function">PDOStatement::debugDumpParams()</a></span> method has been
+   updated to include the SQL being sent to the DB, where the full, raw query
+   (including the replaced placeholders with their bounded values) will be
+   shown. This has been added to aid with debugging emulated prepares (and so
+   it will only be available when emulated prepares are turned on).
+  </p>
+ </div>
+
+ <div class="sect2" id="migration72.new-features.extended-ops-in-ldap">
+  <h3 class="title">Support for extended operations in ext/LDAP</h3>
+
+  <p class="para">
+   Support for EXOP has been added to the LDAP extension. This has been done by
+   exposing the following functions and constants:
+  </p>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <span class="simpara">
+     <span class="function"><strong>ldap_parse_exop()</strong></span>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <span class="function"><strong>ldap_exop()</strong></span>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <span class="function"><strong>ldap_exop_passwd()</strong></span>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <span class="function"><strong>ldap_exop_whoami()</strong></span>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <strong><code>LDAP_EXOP_START_TLS</code></strong>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <strong><code>LDAP_EXOP_MODIFY_PASSWD</code></strong>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <strong><code>LDAP_EXOP_REFRESH</code></strong>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <strong><code>LDAP_EXOP_WHO_AM_I</code></strong>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <strong><code>LDAP_EXOP_TURN</code></strong>
+    </span>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration72.new-features.addr-info-in-sockets">
+  <h3 class="title">Address Information Additions to ext/sockets</h3>
+
+  <p class="para">
+   The sockets extension now has the ability to lookup address information, as
+   well as connect to it, bind to it, and explain it. The following four
+   functions have been added for this:
+  </p>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <span class="simpara">
+     <span class="function"><strong>socket_addrinfo_lookup()</strong></span>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <span class="function"><strong>socket_addrinfo_connect()</strong></span>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <span class="function"><strong>socket_addrinfo_bind()</strong></span>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <span class="function"><strong>socket_addrinfo_explain()</strong></span>
+    </span>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration72.new-features.param-type-widening">
+  <h3 class="title">Parameter type widening</h3>
+
+  <p class="para">
+   Parameter types from overridden methods and from interface implementations
+   may now be omitted. This is still in compliance with LSP, since parameters
+   types are contravariant.
+  </p>
+
+  <div class="informalexample">
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">interface&nbsp;</span><span style="color: #0000BB">A<br /></span><span style="color: #007700">{<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;</span><span style="color: #0000BB">Test</span><span style="color: #007700">(array&nbsp;</span><span style="color: #0000BB">$input</span><span style="color: #007700">);<br />}<br /><br />class&nbsp;</span><span style="color: #0000BB">B&nbsp;</span><span style="color: #007700">implements&nbsp;</span><span style="color: #0000BB">A<br /></span><span style="color: #007700">{<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;</span><span style="color: #0000BB">Test</span><span style="color: #007700">(</span><span style="color: #0000BB">$input</span><span style="color: #007700">){}&nbsp;</span><span style="color: #FF8000">//&nbsp;type&nbsp;omitted&nbsp;for&nbsp;$input<br /></span><span style="color: #007700">}</span>
+</span>
+</code></div>
+   </div>
+
+  </div>
+ </div>
+
+ <div class="sect2" id="migration72.new-features.trailing-comma-in-grouped-namespaces">
+  <h3 class="title">Allow a trailing comma for grouped namespaces</h3>
+
+  <p class="para">
+   A trailing comma can now be added to the group-use syntax introduced in
+   PHP 7.0.
+  </p>
+
+  <div class="informalexample">
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">use&nbsp;</span><span style="color: #0000BB">Foo</span><span style="color: #007700">\</span><span style="color: #0000BB">Bar</span><span style="color: #007700">\{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">Foo</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">Bar</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">Baz</span><span style="color: #007700">,<br />};</span>
+</span>
+</code></div>
+   </div>
+
+  </div>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="migration72.html">Migrating from PHP 7.1.x to PHP 7.2.x</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="migration72.new-functions.html">New functions</a></div>
+ <div class="up"><a href="migration72.html">Migrating from PHP 7.1.x to PHP 7.2.x</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>
