@@ -685,12 +685,18 @@ echo "H5P BLOCK ENTERED";
 
        // === H5P ATTEMPTS WITH IP ===
         $attempts = $DB->get_records_sql("
-            SELECT a.id, a.timemodified, a.ipaddress, ar.rawscore, ar.maxscore
-            FROM {h5pactivity_attempts} a
-            JOIN {h5pactivity_attempts_results} ar ON ar.attemptid = a.id
-            WHERE a.h5pactivityid = ? AND a.userid = ?
-            ORDER BY a.timemodified DESC
-        ", [$h5p->id, $student->id]);
+    SELECT
+        a.id,
+        a.timemodified,
+        a.ipaddress,
+        COALESCE(SUM(ar.rawscore), 0) AS rawscore,
+        COALESCE(SUM(ar.maxscore), 0) AS maxscore
+    FROM {h5pactivity_attempts} a
+    LEFT JOIN {h5pactivity_attempts_results} ar ON ar.attemptid = a.id
+    WHERE a.h5pactivityid = ? AND a.userid = ?
+    GROUP BY a.id, a.timemodified, a.ipaddress
+    ORDER BY a.timemodified DESC
+", [$h5p->id, $student->id]);
 
         $statusImg = 'flag-red-icon.png';
         $statusNum = 0;
