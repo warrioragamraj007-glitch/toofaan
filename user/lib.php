@@ -114,6 +114,11 @@ function user_create_user($user, $updatepassword = true, $triggerevent = true) {
         }
     }
 
+
+    // Store only last 5 digits of parent phone chandrika
+if (!empty($user->phone2)) {
+    $user->phone2 = local_store_parent_phone_last5($user->phone2);
+}
     // Insert the user into the database.
     $newuserid = $DB->insert_record('user', $user);
 
@@ -197,6 +202,11 @@ function user_update_user($user, $updatepassword = true, $triggerevent = true) {
         }
     }
 
+     // Store only last 5 digits of parent phone chandrika
+if (!empty($user->phone2)) {
+    $user->phone2 = local_store_parent_phone_last5($user->phone2);
+}
+
     $DB->update_record('user', $user);
 
     if ($updatepassword) {
@@ -215,6 +225,17 @@ function user_update_user($user, $updatepassword = true, $triggerevent = true) {
     if ($triggerevent) {
         \core\event\user_updated::create_from_userid($user->id)->trigger();
     }
+}
+
+// store last 5 digits of parent phone chandrika
+function local_store_parent_phone_last5($phone) {
+    $phone = preg_replace('/\D+/', '', trim((string)$phone));
+
+    if ($phone === '') {
+        return '';
+    }
+
+    return substr($phone, -5);
 }
 
 /**

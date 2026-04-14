@@ -427,6 +427,10 @@ if (isloggedin() and !isguestuser()) {
     $loginform = new \core_auth\output\login($authsequence, $frm->username);
     $loginform->set_error($errormsg);
     echo $OUTPUT->render($loginform);
+
+     echo '<div class="login-forgot" style="text-align:center; margin-top:10px;">
+        <a href="'.$CFG->wwwroot.'/login/forgot_password.php">Forgot password</a>
+    </div>';
 }
 
 echo $OUTPUT->footer();

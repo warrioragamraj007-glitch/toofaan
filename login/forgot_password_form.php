@@ -15,76 +15,185 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Forgot password page.
+ * Forgot password form using username + parent phone number.
  *
  * @package    core
  * @subpackage auth
- * @copyright  2006 Petr Skoda {@link http://skodak.org}
+ * @copyright  2026
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 defined('MOODLE_INTERNAL') || die();
 
-require_once($CFG->libdir.'/formslib.php');
-require_once($CFG->dirroot.'/user/lib.php');
+require_once($CFG->libdir . '/formslib.php');
+require_once($CFG->dirroot . '/user/lib.php');
 require_once('lib.php');
 
-/**
- * Reset forgotten password form definition.
- *
- * @package    core
- * @subpackage auth
- * @copyright  2006 Petr Skoda {@link http://skodak.org}
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
 class login_forgot_password_form extends moodleform {
 
     /**
      * Define the forgot password form.
      */
-    function definition() {
-        global $USER;
+    public function definition() {
+        $mform = $this->_form;
 
-        $mform    = $this->_form;
         $mform->setDisableShortforms(true);
 
-        // Hook for plugins to extend form definition.
-        core_login_extend_forgot_password_form($mform);
+        // Hide "Required" text at bottom and fix label width for both step 1 and step 2.
+       $mform->addElement('html', '
+<style>
+    .mform .form-group.row .col-md-3,
+    .mform .form-group.row .col-form-label,
+    .mform .fitem .fitemtitle {
+        width: 220px !important;
+        min-width: 150px !important;
+        max-width: 1500px !important;
+        flex: 0 0 150px !important;
+    }
 
-        $mform->addElement('header', 'searchbyusername', get_string('searchbyusername'), '');
+    .mform .form-group.row .col-md-3 label,
+    .mform .form-group.row .col-form-label,
+    .mform .fitem .fitemtitle label {
+        white-space: nowrap !important;
+        word-break: normal !important;
+    }
 
-        $purpose = user_edit_map_field_purpose($USER->id, 'username');
-        $mform->addElement('text', 'username', get_string('username'), 'size="20"' . $purpose);
-        $mform->setType('username', PARAM_RAW);
+    .mform .fitem .felement,
+    .mform .form-group.row .felement,
+    .mform .form-group.row .col-md-9 {
+        flex: 0 0 calc(100% - 150px) !important;
+        max-width: calc(100% - 150px) !important;
+    }
 
-        $submitlabel = get_string('search');
-        $mform->addElement('submit', 'submitbuttonusername', $submitlabel);
+    .mform .required {
+        display: none !important;
+    }
+</style>
+');
 
-        $mform->addElement('header', 'searchbyemail', get_string('searchbyemail'), '');
+        $step = isset($this->_customdata['step']) ? (int)$this->_customdata['step'] : 1;
+        $userid = isset($this->_customdata['userid']) ? (int)$this->_customdata['userid'] : 0;
+        $directreset = !empty($this->_customdata['directreset']);
+        $verified = !empty($this->_customdata['verified']);
 
-        $purpose = user_edit_map_field_purpose($USER->id, 'email');
-        $mform->addElement('text', 'email', get_string('email'), 'maxlength="100" size="30"' . $purpose);
-        $mform->setType('email', PARAM_RAW_TRIMMED);
+        if ($step === 1) {
+            $mform->addElement('header', 'verifyuser', 'Verify Student');
 
-        $submitlabel = get_string('search');
-        $mform->addElement('submit', 'submitbuttonemail', $submitlabel);
+            $mform->addElement('text', 'username', get_string('username'), ['size' => 25]);
+            $mform->setType('username', PARAM_RAW_TRIMMED);
+            $mform->addRule('username', get_string('required'), 'required', null, 'client');
+
+            $mform->addElement('text', 'parentphone', 'Parent Phone', [
+                'maxlength' => 20,
+                'size' => 25,
+                'placeholder' => 'Enter full parent phone number'
+            ]);
+            $mform->setType('parentphone', PARAM_RAW_TRIMMED);
+            $mform->addRule('parentphone', 'Parent phone number is required', 'required', null, 'client');
+
+            $mform->addElement('hidden', 'step', 1);
+            $mform->setType('step', PARAM_INT);
+
+            $mform->addElement('submit', 'submitbutton', 'Verify');
+        }
+
+        if ($step === 2) {
+            $mform->addElement('header', 'resetpasswordheader', 'Reset Password');
+
+            // Add here
+    $mform->addElement('html', '
+    <div class="alert alert-info">
+    <strong>Password requirements:</strong><br>
+    • Minimum 8 characters<br>
+    • At least 1 uppercase letter<br>
+    • At least 1 special character ( *, -, # )
+    </div>
+    ');
+
+            if ($verified) {
+                $mform->addElement('html', html_writer::div(
+                    'Verification successful. Please set a new password.',
+                    'alert alert-success'
+                ));
+            }
+
+            if ($directreset) {
+                $mform->addElement('text', 'username', get_string('username'), ['size' => 25]);
+                $mform->setType('username', PARAM_RAW_TRIMMED);
+                $mform->addRule('username', get_string('required'), 'required', null, 'client');
+
+                $mform->addElement('text', 'parentphone', 'Parent Phone', [
+                    'maxlength' => 20,
+                    'size' => 25,
+                    'placeholder' => 'Enter full parent phone number'
+                ]);
+                $mform->setType('parentphone', PARAM_RAW_TRIMMED);
+                $mform->addRule('parentphone', 'Parent phone number is required', 'required', null, 'client');
+            }
+
+            $mform->addElement('password', 'newpassword', 'New Password');
+            $mform->setType('newpassword', PARAM_RAW);
+            $mform->addRule('newpassword', 'New password is required', 'required', null, 'client');
+
+            $mform->addElement('password', 'confirmpassword', 'Confirm Password');
+            $mform->setType('confirmpassword', PARAM_RAW);
+            $mform->addRule('confirmpassword', 'Confirm password is required', 'required', null, 'client');
+
+            $mform->addElement('hidden', 'step', 2);
+            $mform->setType('step', PARAM_INT);
+
+            $mform->addElement('hidden', 'userid', $userid);
+            $mform->setType('userid', PARAM_INT);
+
+            $mform->addElement('submit', 'submitbutton', 'Reset Password');
+        }
     }
 
     /**
-     * Validate user input from the forgot password form.
-     * @param array $data array of submitted form fields.
-     * @param array $files submitted with the form.
-     * @return array errors occuring during validation.
+     * Validation.
+     *
+     * @param array $data
+     * @param array $files
+     * @return array
      */
-    function validation($data, $files) {
-
+    public function validation($data, $files) {
         $errors = parent::validation($data, $files);
 
-        // Extend validation for any form extensions from plugins.
-        $errors = array_merge($errors, core_login_validate_extend_forgot_password_form($data));
+        $step = isset($data['step']) ? (int)$data['step'] : 1;
+        $directreset = !empty($this->_customdata['directreset']);
 
-        $errors += core_login_validate_forgot_password_data($data);
+        if ($step === 1 || ($step === 2 && $directreset)) {
+            $parentphone = trim($data['parentphone'] ?? '');
+            $normalizedparentphone = preg_replace('/\D+/', '', $parentphone);
+
+            if ($parentphone === '') {
+                $errors['parentphone'] = 'Parent phone number is required';
+            } else if ($normalizedparentphone === '' || strlen($normalizedparentphone) < 5) {
+                $errors['parentphone'] = 'Enter a valid parent phone number with at least 5 digits';
+            }
+
+            if (empty(trim($data['username'] ?? ''))) {
+                $errors['username'] = get_string('required');
+            }
+        }
+
+        if ($step === 2) {
+            $newpassword = $data['newpassword'] ?? '';
+            $confirmpassword = $data['confirmpassword'] ?? '';
+
+            if ($newpassword === '') {
+                $errors['newpassword'] = 'New password is required';
+            }
+
+            if ($confirmpassword === '') {
+                $errors['confirmpassword'] = 'Confirm password is required';
+            }
+
+            if ($newpassword !== '' && $confirmpassword !== '' && $newpassword !== $confirmpassword) {
+                $errors['confirmpassword'] = 'Passwords do not match';
+            }
+        }
 
         return $errors;
     }
-
 }
