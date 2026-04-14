@@ -16,7 +16,7 @@ $PAGE->set_pagelayout('standard');
 $PAGE->set_context(context_system::instance());
 $PAGE->set_title('Tessellator 5.0-testcenter');
 
-// === JSH5P crossword code by chandrika===
+// === JS HERE FOR H5P===
 $PAGE->requires->jquery();
 $PAGE->requires->js_init_code('
 require(["jquery"], function($) {
@@ -57,7 +57,7 @@ require(["jquery"], function($) {
     }, 15000);
 });
 ');
-// $PAGE->set_heading('Teacher dashboard');
+ $PAGE->set_heading('Teacher dashboard');
 require_login();
 if (!(user_has_role_assignment($USER->id,3) ) ) {
 
@@ -82,6 +82,9 @@ if($cid){
 else{
     redirect($CFG->wwwroot.'/local/teacher/dashboard.php');
 }
+
+
+echo '<input type="hidden" id="courseid" value="'.$cid.'" />';
 
 /*initializing required parameters*/
 $currentActivityId=0;

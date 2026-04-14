@@ -758,9 +758,6 @@ require_once('quizsubmissions.php');
 }
 
 
-
-
-
 ?>
 </body>
 </html>
