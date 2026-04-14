@@ -15,6 +15,48 @@ require_once($CFG->dirroot.'/local/student/custom_tele.php');
 $PAGE->set_pagelayout('standard');
 $PAGE->set_context(context_system::instance());
 $PAGE->set_title('Tessellator 5.0-testcenter');
+
+// === JSH5P crossword code by chandrika===
+$PAGE->requires->jquery();
+$PAGE->requires->js_init_code('
+require(["jquery"], function($) {
+    var cid = ' . $cid . ';
+    var secid = ' . $secid . ';
+
+    $(document).on("click", ".students", function() {
+        var actid = $(this).data("mid");
+        var typeid = $(this).data("typeid") || 0;
+        var secname = $("#hcstu-section").val() || "All";
+
+        $("#sub_list").html(
+            \'<div style="text-align:center;padding:20px;">\' +
+            \'<img src="\' + M.cfg.wwwroot + \'/pix/loading.gif" alt="Loading...">\' +
+            \'</div>\'
+        );
+
+        $.get("' . $CFG->wwwroot . '/local/teacher/testcenter/sub_list.php", {
+            id: actid,
+            typeid: typeid,
+            secname: secname,
+            cid: cid,
+            secid: secid
+        }, function(data) {
+            $("#sub_list").html(data);
+            $(".students").removeClass("text-primary");
+            $(this).addClass("text-primary");
+        }).fail(function(xhr, status, error) {
+            console.error("AJAX Error:", status, error);
+            $("#sub_list").html(\'<p style="color:red;">Error loading submissions: \' + error + \'</p>\');
+        });
+    });
+
+    // Auto-refresh
+    setInterval(function() {
+        var $active = $(".students.text-primary");
+        if ($active.length) $active.trigger("click");
+    }, 15000);
+});
+');
 // $PAGE->set_heading('Teacher dashboard');
 require_login();
 if (!(user_has_role_assignment($USER->id,3) ) ) {
