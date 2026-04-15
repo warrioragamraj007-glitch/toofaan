@@ -397,6 +397,10 @@ function get_students_activity_info($courseid,$topicid,$stdsection)
     $assign = $DB->get_field('modules', 'id', array('name'=>'assign'));
 
     $activities = getAllActivitiesByTopicAndCourse($courseid,$topicid,$vpl,$quiz,$assign);
+//        echo "Assign module id: ".$assign."<br>";
+// echo "<pre>";
+// print_r($activities);
+// echo "</pre>";
 
     // ---------------------------
     // Step 1: Compute Total Marks
@@ -455,7 +459,9 @@ function get_students_activity_info($courseid,$topicid,$stdsection)
     }
 
     // Total Column at end
-    $html.='<th class="header">Total Grade</th></tr></thead><tbody class="grade-info">';
+    $html.='<th class="header">Total Grade</th>
+        <th class="header">Attendance</th>
+        </tr></thead><tbody class="grade-info">';
 
     // ---------------------------
     // Step 3: Rows
@@ -474,6 +480,9 @@ function get_students_activity_info($courseid,$topicid,$stdsection)
         $maxscore= $entry['maxscore']; // always valid now
 
         $totalattempted = 0;
+        //COURSE LEVEL ATTENDANCE log code by chandrika
+            $isPresent = getCourseAttendance($courseid, $student->id);
+            $attendanceText = $isPresent ? 'Present' : 'Absent';
         $acts='';
 
         foreach($activities as $act){
@@ -496,6 +505,7 @@ function get_students_activity_info($courseid,$topicid,$stdsection)
             <td>'.$totalattempted.'</td>
             '.$acts.'
             <td>'.$score.'/'.$maxscore.'</td>
+            <td>'.$attendanceText.'</td>
         </tr>';
 
         $rank++;
@@ -505,6 +515,20 @@ function get_students_activity_info($courseid,$topicid,$stdsection)
     $html.='</tbody>';
 
     return $html.'<p id="records">'.$recordsCount.'</p>';
+}
+
+// student attendace log code by chandrika
+function getCourseAttendance($courseid, $userid) {
+    global $DB;
+
+    return $DB->record_exists(
+        'webinar_attendance',
+        [
+            'cid' => $courseid,
+            'userid' => $userid,
+            'attendance' => 1
+        ]
+    );
 }
 
 //new feature for student activities group wise report

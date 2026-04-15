@@ -186,7 +186,18 @@ if (user_has_role_assignment($USER->id, 5)) {
         }
         else {
 
-            echo '<a class="btn btn-primary btn-lg pull-right" target="_blank" href=' . $reflink . ' value="submit" ><span>Attempt</span></a>';
+            //echo '<a class="btn btn-primary btn-lg pull-right" target="_blank" href=' . $reflink . ' value="submit" ><span>Attempt</span></a>';
+//STUDENT ATTENDANCE LOG BY chandrika
+            echo '<a 
+  class="btn btn-primary btn-lg pull-right activity-attempt"
+  data-href="'.$reflink.'"
+  data-mod="'.$im.'"
+  data-cid="'.$courseid.'"
+  data-aid="'.$activitycm.'"
+  data-userid="'.$USER->id.'"
+  target="_blank">
+  <span>Attempt</span>
+</a>';
 
         }
         echo '</div>';
@@ -353,7 +364,38 @@ var websoc = '<?php echo $CFG->websocket; ?>';
 
         </script>
 
+<script>
+    //STUDENT ATTENDANCE LOG BY chandrika
+$(document).on("click", ".activity-attempt", function (e) {
 
+    e.preventDefault();
+
+    const $btn = $(this);
+    if ($btn.data('clicked')) return;
+    $btn.data('clicked', true);
+
+    const link = $btn.data("href");
+
+    if (!link) {
+        console.error("Activity link missing");
+        return;
+    }
+
+    const mod    = $btn.data("mod");
+    const cid    = $btn.data("cid");
+    const aid    = $btn.data("aid");
+    const userid = $btn.data("userid");
+
+    if (mod === 'vpl' || mod === 'quiz') {
+        $.post(baseUrl + "/local/student/log_attendance.php", {
+            cid, aid, userid
+        });
+    }
+
+    window.open(link, "_blank");
+});
+
+</script>
 
 
 <?php
