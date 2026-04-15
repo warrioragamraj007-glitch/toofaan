@@ -1830,56 +1830,47 @@ void Evaluation::runTests() {
 
 		/* TLE Grade Reduction Logic Start */
 
-		std::string commentStr = testCases[i].getComment();
-		char *etim;
-		int tstim = 0;
+long long tstim = testCases[i].getExecutionTimeNs();
 
-		etim = strrchr(const_cast<char*>(commentStr.c_str()), '$');
+ttime += tstim;
 
-		if (etim) {
-			etim++;
-			tstim = atoi(etim);
+if (tstim > 1000000000)
+	printf("Time Taken = %.3f Seconds\n", tstim / 1000000000.0);
+else if (tstim > 1000000)
+	printf("Time Taken = %.3f Milli Sec\n", tstim / 1000000.0);
+else if (tstim > 1000)
+	printf("Time Taken = %.3f Micro Sec\n", tstim / 1000.0);
+else
+	printf("Time Taken = %lld Nano Sec\n", tstim);
 
-			ttime += tstim;
+if (tletime > 0) {
+	if (tstim > tletime && testCases[i].isCorrectResult()) {
 
-			if (tstim > 1000000000)
-				printf("Time Taken = %.3f Seconds\n", tstim / 1000000000.0);
-			else if (tstim > 1000000)
-				printf("Time Taken = %.3f Milli Sec\n", tstim / 1000000.0);
-			else if (tstim > 1000)
-				printf("Time Taken = %.3f Micro Sec\n", tstim / 1000.0);
-			else
-				printf("Time Taken = %d Nano Sec\n", tstim);
+		testCases[i].setGradeReductionApplied(defaultGradeReduction);
+		grade -= testCases[i].getGradeReductionApplied();
 
-			if (tletime > 0) {
-				if (tstim > tletime && testCases[i].isCorrectResult()) {
+		if (grade < grademin)
+			grade = grademin;
 
-					testCases[i].setGradeReductionApplied(defaultGradeReduction);
-					grade -= testCases[i].getGradeReductionApplied();
+		if (ncomments < MAXCOMMENTS) {
+			strncpy(titles[ncomments],
+				testCases[i].getCommentTitle().c_str(),
+				MAXCOMMENTSTITLELENGTH);
 
-					if (grade < grademin)
-						grade = grademin;
+			strncpy(titlesGR[ncomments],
+				testCases[i].getCommentTitle(true).c_str(),
+				MAXCOMMENTSTITLELENGTH);
 
-					if (ncomments < MAXCOMMENTS) {
-						strncpy(titles[ncomments],
-							testCases[i].getCommentTitle().c_str(),
-							MAXCOMMENTSTITLELENGTH);
+			strncpy(comments[ncomments],
+				testCases[i].getComment().c_str(),
+				MAXCOMMENTSLENGTH);
 
-						strncpy(titlesGR[ncomments],
-							testCases[i].getCommentTitle(true).c_str(),
-							MAXCOMMENTSTITLELENGTH);
-
-						strncpy(comments[ncomments],
-							testCases[i].getComment().c_str(),
-							MAXCOMMENTSLENGTH);
-
-						ncomments++;
-					}
-
-					printf("Time Limit Exceeded\n");
-				}
-			}
+			ncomments++;
 		}
+
+		printf("Time Limit Exceeded\n");
+	}
+}
 	}
 }
 
