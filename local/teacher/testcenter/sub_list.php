@@ -317,6 +317,16 @@ echo '<div class="repo">
 				echo '<th class="header">Lang</th>';
 				} 
 				echo '<th class="header" style="text-align:center">Submissions</th>';
+                //tle code updated by chandrika
+
+                echo'<th class="header" style="text-align:center" title="Evaluation Time(in Micro Seconds)">Time(µ sec)</th>';
+
+                if ($vpl->get_instance()->tlelimit > 0) {
+
+    echo '<th class="header" style="text-align:center" title="Time Limit Exceeded">TLE</th>';
+
+}
+
                 if($vpl->get_instance()->algorithm!=''){
                     echo '<th class="header">Algorithm</th>';
                     echo '<th class="header">Time Complexity</th>';
@@ -362,6 +372,10 @@ echo '<div class="repo">
 
     if($data->submission == null){
         $subtime = get_string('nosubmission',VPL);
+        //tle code updated by chandrika
+                $exectime="--";
+              $istle="--";
+
         $hrefview=vpl_mod_href('forms/submissionview.php','id',$actid,
             'userid',$userinfo->id,'inpopup',1);
         //TODO clean comment
@@ -400,6 +414,12 @@ echo '<div class="repo">
         $hrefgrade=vpl_mod_href('forms/gradesubmission.php','id',$actid,
             'userid',$subinstance->userid,'inpopup',1);
         $subtime=userdate($subinstance->datesubmitted);
+
+                //tle code by chandrika
+        $exectime=$subinstance->evaluationtime;
+        $istle=($subinstance->istle)?"Yes":"No";
+        //end
+
          $sip=$subinstance->subip;
 
         // var_dump($sip);
@@ -587,6 +607,13 @@ $username = $DB->get_field('user', 'username', array('id' => $userinfo->id));
 				 echo '<td style="text-align:center"><a href="' . $usersubcount . '" '.$target.'>' . $nsub . ' </a> </td>';  // previous code before playwright
                 }
                 // playwright new code for webapp check rammohan  end
+                                //tle code updated by chandrika
+              echo '<td style="text-align:center" title="Evaluation Time(in Seconds)">'.$exectime.'</td>';
+                	if($vpl->get_instance()->tlelimit>0){
+                    		echo '<td style="text-align:center" title="Time Limit Exceeded">'.$istle.'</td>';                    
+                	}
+
+
 
                 if($vpl->get_instance()->algorithm!=''){
                     $subinstance = $submissions[$userinfo->id];

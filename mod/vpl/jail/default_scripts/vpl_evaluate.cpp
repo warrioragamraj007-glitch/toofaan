@@ -1715,39 +1715,26 @@ void Evaluation::loadTestCases(string fname) {
 
 bool Evaluation::loadParams() {
 
-    std::cerr << "DEBUG: Loading VPL parameters..." << std::endl;
-
     grademin = Tools::getenv("VPL_GRADEMIN", 0.0);
-    std::cerr << "DEBUG: VPL_GRADEMIN = " << grademin << std::endl;
 
     grademax = Tools::getenv("VPL_GRADEMAX", 10);
-    std::cerr << "DEBUG: VPL_GRADEMAX = " << grademax << std::endl;
 
     maxtime = (int) Tools::getenv("VPL_MAXTIME", 20);
-    std::cerr << "DEBUG: VPL_MAXTIME = " << maxtime << std::endl;
 
     variation = Tools::toLower(
                     Tools::trim(
                         Tools::getenv("VPL_VARIATION","")
                     )
                 );
-    std::cerr << "DEBUG: VPL_VARIATION = " << variation << std::endl;
 
-     // Read TLE in milliseconds from Moodle
-double rawTle = Tools::getenv("VPL_TLELIMIT", 0.0);
-tletime = (long long)rawTle;
-
-std::cerr << "DEBUG: VPL_TLELIMIT (raw) = " << rawTle << std::endl;
-std::cerr << "DEBUG: TLE Limit Used (ns) = " << tletime << std::endl;
-
+    // Read TLE in milliseconds from Moodle
+    double rawTle = Tools::getenv("VPL_TLELIMIT", 0.0);
+    tletime = (long long)rawTle;
 
     totalExecutionTimeNs = 0;
     tleFlag = false;
 
     noGrade = grademin >= grademax;
-    std::cerr << "DEBUG: noGrade flag = " << noGrade << std::endl;
-
-    std::cerr << "DEBUG: loadParams() finished." << std::endl;
 
     return true;
 }
@@ -1768,15 +1755,11 @@ void Evaluation::addFatalError(const char *m) {
 
 void Evaluation::runTests() {
 
-	printf("\n===== DEBUG: ENTER runTests() =====\n");
-
 	if (testCases.size() == 0) {
-		printf("DEBUG: No test cases found.\n");
 		return;
 	}
 
 	if (maxtime < 0) {
-		printf("DEBUG: Global timeout before starting tests.\n");
 		addFatalError("Global timeout");
 		return;
 	}
@@ -1785,32 +1768,17 @@ void Evaluation::runTests() {
 	nruns = 0;
 	grade = grademax;
 
-	printf("DEBUG: grademax = %.2f\n", grademax);
-	printf("DEBUG: grademin = %.2f\n", grademin);
-	printf("DEBUG: Total testCases = %lu\n", (unsigned long)testCases.size());
-	printf("DEBUG: maxtime = %d\n", maxtime);
-	printf("DEBUG: tletime = %d\n", tletime);
-
 	float defaultGradeReduction = (grademax - grademin) / testCases.size();
 	int timeout = maxtime / testCases.size();
 
-	printf("DEBUG: defaultGradeReduction = %.2f\n", defaultGradeReduction);
-	printf("DEBUG: timeout per test = %d\n", timeout);
-
 	for (int i = 0; i < testCases.size(); i++) {
 
-		printf("\n----- DEBUG: START TEST %d -----\n", i+1);
-
 		printf("Testing %d/%lu : %s\n",
-		       i+1,
+		       i + 1,
 		       (unsigned long)testCases.size(),
 		       testCases[i].getCaseDescription().c_str());
 
-		printf("DEBUG: Grade before test = %.2f\n", grade);
-		printf("DEBUG: Global elapsed time = %d\n", Timer::elapsedTime());
-
 		if (timeout <= 1 || Timer::elapsedTime() >= maxtime) {
-			printf("DEBUG: Global timeout triggered inside loop.\n");
 			grade = grademin;
 			addFatalError("Global timeout");
 			return;
@@ -1818,49 +1786,32 @@ void Evaluation::runTests() {
 
 		if (maxtime - Timer::elapsedTime() < timeout) {
 			timeout = maxtime - Timer::elapsedTime();
-			printf("DEBUG: Adjusted timeout = %d\n", timeout);
 		}
 
 		testCases[i].runTest(timeout);
 		nruns++;
 
-		printf("DEBUG: Test executed.\n");
-		printf("DEBUG: isCorrectResult = %d\n",
-		       testCases[i].isCorrectResult());
-
 		if (!testCases[i].isCorrectResult()) {
-
-			printf("DEBUG: Wrong Answer detected.\n");
 
 			if (Stop::isTERMRequested())
 				break;
 
 			float gr = testCases[i].getGradeReduction();
-			printf("DEBUG: Custom grade reduction = %.5f\n", gr);
 
 			if (gr == std::numeric_limits<float>::min()) {
-				printf("DEBUG: Using default grade reduction.\n");
 				testCases[i].setGradeReductionApplied(defaultGradeReduction);
-			}
-			else {
+			} else {
 				testCases[i].setGradeReductionApplied(gr);
 			}
 
-			printf("DEBUG: Reduction applied = %.2f\n",
-			       testCases[i].getGradeReductionApplied());
-
 			grade -= testCases[i].getGradeReductionApplied();
 
-			if(grade<grademin)
-				grade=grademin;
-
-			printf("DEBUG: Grade after WA reduction = %.2f\n", grade);
+			if (grade < grademin)
+				grade = grademin;
 
 			nerrors++;
 
-			if(ncomments<MAXCOMMENTS){
-				printf("DEBUG: Storing comment for WA.\n");
-
+			if (ncomments < MAXCOMMENTS) {
 				strncpy(titles[ncomments],
 					testCases[i].getCommentTitle().c_str(),
 					MAXCOMMENTSTITLELENGTH);
@@ -1877,92 +1828,60 @@ void Evaluation::runTests() {
 			}
 		}
 
-	/* TLE Grade Reduction Logic Start */
+		/* TLE Grade Reduction Logic Start */
 
 		std::string commentStr = testCases[i].getComment();
-		printf("DEBUG: Raw comment string = %s\n", commentStr.c_str());
-
 		char *etim;
 		int tstim = 0;
 
 		etim = strrchr(const_cast<char*>(commentStr.c_str()), '$');
 
-		if(etim){
-
-			printf("DEBUG: '$' found in comment.\n");
-
+		if (etim) {
 			etim++;
-			tstim=atoi(etim);
+			tstim = atoi(etim);
 
-			printf("DEBUG: Extracted execution time (ns) = %d\n", tstim);
+			ttime += tstim;
 
-			ttime+= tstim;
-
-			if(tstim>1000000000)
-				printf("Time Taken = %.3f Seconds\n",tstim/1000000000.0);
-			else if(tstim>1000000)
-				printf("Time Taken = %.3f Milli Sec\n",tstim/1000000.0);
-			else if(tstim>1000)
-				printf("Time Taken = %.3f Micro Sec\n",tstim/1000.0);
+			if (tstim > 1000000000)
+				printf("Time Taken = %.3f Seconds\n", tstim / 1000000000.0);
+			else if (tstim > 1000000)
+				printf("Time Taken = %.3f Milli Sec\n", tstim / 1000000.0);
+			else if (tstim > 1000)
+				printf("Time Taken = %.3f Micro Sec\n", tstim / 1000.0);
 			else
-				printf("Time Taken = %d Nano Sec\n",tstim );
+				printf("Time Taken = %d Nano Sec\n", tstim);
 
-			if(tletime>0){
-
-				printf("DEBUG: tletime = %d\n", tletime);
-				printf("DEBUG: isCorrectResult = %d\n",
-				       testCases[i].isCorrectResult());
-				printf("DEBUG: Grade before TLE check = %.2f\n", grade);
-
-				if(tstim>tletime && testCases[i].isCorrectResult()){
-
-					printf("DEBUG: TLE CONDITION TRUE.\n");
+			if (tletime > 0) {
+				if (tstim > tletime && testCases[i].isCorrectResult()) {
 
 					testCases[i].setGradeReductionApplied(defaultGradeReduction);
 					grade -= testCases[i].getGradeReductionApplied();
 
-					printf("DEBUG: TLE reduction applied = %.2f\n",
-					       defaultGradeReduction);
-					printf("DEBUG: Grade after TLE reduction = %.2f\n",
-					       grade);
+					if (grade < grademin)
+						grade = grademin;
 
-					strncpy(titles[ncomments],
-						testCases[i].getCommentTitle().c_str(),
-						MAXCOMMENTSTITLELENGTH);
+					if (ncomments < MAXCOMMENTS) {
+						strncpy(titles[ncomments],
+							testCases[i].getCommentTitle().c_str(),
+							MAXCOMMENTSTITLELENGTH);
 
-					strncpy(titlesGR[ncomments],
-						testCases[i].getCommentTitle(true).c_str(),
-						MAXCOMMENTSTITLELENGTH);
+						strncpy(titlesGR[ncomments],
+							testCases[i].getCommentTitle(true).c_str(),
+							MAXCOMMENTSTITLELENGTH);
 
-					strncpy(comments[ncomments],
-						testCases[i].getComment().c_str(),
-						MAXCOMMENTSLENGTH);
+						strncpy(comments[ncomments],
+							testCases[i].getComment().c_str(),
+							MAXCOMMENTSLENGTH);
 
-					ncomments++;
+						ncomments++;
+					}
 
 					printf("Time Limit Exceeded\n");
 				}
-				else{
-					printf("DEBUG: Within time limit.\n");
-				}
-
-				printf("DEBUG: Grade after TLE check = %.2f\n", grade);
 			}
 		}
-		else{
-			printf("DEBUG: No '$' time marker found in comment.\n");
-		}
-
-		printf("----- DEBUG: END TEST %d | Current Grade = %.2f -----\n",
-		       i+1, grade);
 	}
-
-	printf("\n===== DEBUG: EXIT runTests() =====\n");
-	printf("DEBUG: Total Runs = %d\n", nruns);
-	printf("DEBUG: Total Errors = %d\n", nerrors);
-	printf("DEBUG: Final Grade = %.2f\n", grade);
 }
-
 
 void Evaluation::outputEvaluation() {
 	const char* stest[]={" test","tests"};
