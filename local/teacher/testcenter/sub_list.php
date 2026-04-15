@@ -633,7 +633,7 @@ echo '<span style="display:none" id="watchCount">'.$watchCount.'</span>';
 
 // hp crossword   block start by chandrika
 elseif ($typeid == $activityTypeIds['h5pactivity']) {
-echo "H5P BLOCK ENTERED";
+    echo "<div style='background:yellow;padding:5px;'>H5P REPORT BLOCK EXECUTED</div>";
 
     // ==================== H5P ACTIVITY ====================
     $cm = get_coursemodule_from_id('h5pactivity', $actid, 0, false, MUST_EXIST);
@@ -684,17 +684,15 @@ echo "H5P BLOCK ENTERED";
         if ($watch) $watchCount++;
 
        // === H5P ATTEMPTS WITH IP ===
-        $attempts = $DB->get_records_sql("
-    SELECT
-        a.id,
-        a.timemodified,
-        a.ipaddress,
-        COALESCE(SUM(ar.rawscore), 0) AS rawscore,
-        COALESCE(SUM(ar.maxscore), 0) AS maxscore
+      $attempts = $DB->get_records_sql("
+    SELECT a.id,
+           a.timemodified,
+           a.ipaddress,
+           a.rawscore,
+           a.maxscore
     FROM {h5pactivity_attempts} a
-    LEFT JOIN {h5pactivity_attempts_results} ar ON ar.attemptid = a.id
-    WHERE a.h5pactivityid = ? AND a.userid = ?
-    GROUP BY a.id, a.timemodified, a.ipaddress
+    WHERE a.h5pactivityid = ?
+    AND a.userid = ?
     ORDER BY a.timemodified DESC
 ", [$h5p->id, $student->id]);
 
