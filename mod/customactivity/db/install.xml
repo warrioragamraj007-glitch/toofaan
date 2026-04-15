@@ -21,47 +21,47 @@
         </TABLE>
 
         <TABLE NAME="customactivity_questions" COMMENT="Stores questions for custom activity">
-            <FIELDS>
-                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
-                <FIELD NAME="customactivityid" TYPE="int" LENGTH="10" NOTNULL="true"/>
-                <FIELD NAME="qno" TYPE="int" LENGTH="5" NOTNULL="true" DEFAULT="1"/>
-                <FIELD NAME="questiontext" TYPE="text" NOTNULL="true"/>
-                <FIELD NAME="modelanswer" TYPE="text" NOTNULL="false" COMMENT="Optional reference answer for better AI grading"/>
-                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
-            </FIELDS>
-            <KEYS>
-                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
-                <KEY NAME="activity_fk" TYPE="foreign" FIELDS="customactivityid" REFTABLE="customactivity" REFFIELDS="id"/>
-            </KEYS>
-            <INDEXES>
-                <INDEX NAME="order" FIELDS="customactivityid,qno"/>
-            </INDEXES>
-        </TABLE>
+    <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="customactivityid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="qno" TYPE="int" LENGTH="5" NOTNULL="true" DEFAULT="1"/>
+        <FIELD NAME="questiontext" TYPE="text" NOTNULL="true"/>
+        <FIELD NAME="modelanswer" TYPE="text" NOTNULL="false" COMMENT="Optional reference answer for better AI grading"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+    </FIELDS>
+    <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="activity_fk" TYPE="foreign" FIELDS="customactivityid" REFTABLE="customactivity" REFFIELDS="id"/>
+    </KEYS>
+    <INDEXES>
+        <INDEX NAME="customactivityid_qno_ix" UNIQUE="false" FIELDS="customactivityid,qno"/>
+    </INDEXES>
+</TABLE>
 
         <TABLE NAME="customactivity_submissions" COMMENT="Stores student submissions">
-            <FIELDS>
-                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
-                <FIELD NAME="customactivityid" TYPE="int" LENGTH="10" NOTNULL="true"/>
-                <FIELD NAME="questionid" TYPE="int" LENGTH="10" NOTNULL="true"/>
-                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true"/>
-                <FIELD NAME="answer" TYPE="text" NOTNULL="false"/>
-                <FIELD NAME="grade" TYPE="number" LENGTH="10,5" NOTNULL="true" DEFAULT="0.00000"/>
-                <FIELD NAME="feedback" TYPE="text" NOTNULL="false"/>
-                <FIELD NAME="iscorrect" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0"/>
-                <FIELD NAME="attemptno" TYPE="int" LENGTH="3" NOTNULL="true" DEFAULT="1"/>
-                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
-                <FIELD NAME="ipaddress" TYPE="char" LENGTH="45" NOTNULL="false"/>
-            </FIELDS>
-            <KEYS>
-                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
-                <KEY NAME="customactivity_fk" TYPE="foreign" FIELDS="customactivityid" REFTABLE="customactivity" REFFIELDS="id"/>
-                <KEY NAME="question_fk" TYPE="foreign" FIELDS="questionid" REFTABLE="customactivity_questions" REFFIELDS="id"/>
-                <KEY NAME="user_fk" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
-            </KEYS>
-            <INDEXES>
-                <INDEX NAME="userquestion" FIELDS="userid,questionid,attemptno"/>
-            </INDEXES>
-        </TABLE>
+    <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="customactivityid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="questionid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="answer" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="grade" TYPE="number" LENGTH="10,5" NOTNULL="true" DEFAULT="0.00000"/>
+        <FIELD NAME="feedback" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="iscorrect" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="attemptno" TYPE="int" LENGTH="3" NOTNULL="true" DEFAULT="1"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="ipaddress" TYPE="char" LENGTH="45" NOTNULL="false"/>
+    </FIELDS>
+    <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="customactivity_fk" TYPE="foreign" FIELDS="customactivityid" REFTABLE="customactivity" REFFIELDS="id"/>
+        <KEY NAME="question_fk" TYPE="foreign" FIELDS="questionid" REFTABLE="customactivity_questions" REFFIELDS="id"/>
+        <KEY NAME="user_fk" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
+    </KEYS>
+    <INDEXES>
+        <INDEX NAME="userid_questionid_attemptno_ix" UNIQUE="false" FIELDS="userid,questionid,attemptno"/>
+    </INDEXES>
+</TABLE>
 
     </TABLES>
 </XMLDB>
