@@ -2,7 +2,7 @@
 <XMLDB PATH="mod/customactivity/db" VERSION="20251211" COMMENT="Simple Multi-Question AI-Graded Activity">
     <TABLES>
 
-        <TABLE NAME="customactivity">
+        <TABLE NAME="customactivity" COMMENT="Main activity instance">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
                 <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
@@ -20,7 +20,7 @@
             </KEYS>
         </TABLE>
 
-        <TABLE NAME="customactivity_questions">
+        <TABLE NAME="customactivity_questions" COMMENT="Stores questions for custom activity">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
                 <FIELD NAME="customactivityid" TYPE="int" LENGTH="10" NOTNULL="true"/>
@@ -38,7 +38,7 @@
             </INDEXES>
         </TABLE>
 
-        <TABLE NAME="customactivity_submissions">
+        <TABLE NAME="customactivity_submissions" COMMENT="Stores student submissions">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
                 <FIELD NAME="customactivityid" TYPE="int" LENGTH="10" NOTNULL="true"/>
@@ -54,6 +54,7 @@
             </FIELDS>
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="customactivity_fk" TYPE="foreign" FIELDS="customactivityid" REFTABLE="customactivity" REFFIELDS="id"/>
                 <KEY NAME="question_fk" TYPE="foreign" FIELDS="questionid" REFTABLE="customactivity_questions" REFFIELDS="id"/>
                 <KEY NAME="user_fk" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
             </KEYS>
