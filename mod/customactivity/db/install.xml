@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="mod/customactivity/db" VERSION="20251211" COMMENT="Simple Multi-Question AI-Graded Activity">
+    <TABLES>
+
+        <TABLE NAME="customactivity">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true"/>
+                <FIELD NAME="intro" TYPE="text" NOTNULL="false"/>
+                <FIELD NAME="introformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="maxattempts" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="3"/>
+                <FIELD NAME="ai_eval_limit" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="15"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="question" TYPE="text" NOTNULL="false"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+        </TABLE>
+
+        <TABLE NAME="customactivity_questions">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="customactivityid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+                <FIELD NAME="qno" TYPE="int" LENGTH="5" NOTNULL="true" DEFAULT="1"/>
+                <FIELD NAME="questiontext" TYPE="text" NOTNULL="true"/>
+                <FIELD NAME="modelanswer" TYPE="text" NOTNULL="false" COMMENT="Optional reference answer for better AI grading"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="activity_fk" TYPE="foreign" FIELDS="customactivityid" REFTABLE="customactivity" REFFIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="order" FIELDS="customactivityid,qno"/>
+            </INDEXES>
+        </TABLE>
+
+        <TABLE NAME="customactivity_submissions">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="customactivityid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+                <FIELD NAME="questionid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+                <FIELD NAME="answer" TYPE="text" NOTNULL="false"/>
+                <FIELD NAME="grade" TYPE="number" LENGTH="10,5" NOTNULL="true" DEFAULT="0.00000"/>
+                <FIELD NAME="feedback" TYPE="text" NOTNULL="false"/>
+                <FIELD NAME="iscorrect" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="attemptno" TYPE="int" LENGTH="3" NOTNULL="true" DEFAULT="1"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="ipaddress" TYPE="char" LENGTH="45" NOTNULL="false"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="question_fk" TYPE="foreign" FIELDS="questionid" REFTABLE="customactivity_questions" REFFIELDS="id"/>
+                <KEY NAME="user_fk" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="userquestion" FIELDS="userid,questionid,attemptno"/>
+            </INDEXES>
+        </TABLE>
+
+    </TABLES>
+</XMLDB>
