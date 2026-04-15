@@ -83,7 +83,7 @@ if (!(user_has_role_assignment($USER->id,3) ) ) {
 
 
 else{
-    redirect($CFG->wwwroot.'/local/teacher/dashboard.php');
+    //redirect($CFG->wwwroot.'/local/teacher/dashboard.php');
 }
 
 /*initializing required parameters*/
