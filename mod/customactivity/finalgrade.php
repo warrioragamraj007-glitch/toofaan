@@ -62,7 +62,7 @@ if (empty($submissions)) {
 
 // Build prompt for AI
 $prompt = "You are a strict but fair university professor grading a student's full submission.\n\n";
-echo "<pre>";
+
 foreach ($questions as $q) {
     $student_answer = "(no answer)";
     foreach ($submissions as $s) {
@@ -72,13 +72,6 @@ foreach ($questions as $q) {
         }
     }
 
-    echo "Question ID: " . $q->id . "\n";
-    echo "Question No: " . $q->qno . "\n";
-    echo "Student Answer: " . $student_answer . "\n";
-    echo "-----------------------------\n";
-
-echo "</pre>";
-exit;
 
     $prompt .= "Question {$q->qno}:\n{$q->questiontext}\n\n";
     $prompt .= "Model Answer:\n" . trim($q->modelanswer) . "\n\n";
