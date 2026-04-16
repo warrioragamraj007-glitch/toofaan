@@ -506,7 +506,7 @@ echo '<div class="current-activity row">
     $activityTypeIds['quiz'], 
     $activityTypeIds['vpl'], 
     $activityTypeIds['h5pactivity'], 
-    activityTypeIds['customactivity'], //manual questions adding and evaluate using api key code by chandrika
+    $activityTypeIds['customactivity'] //manual questions adding and evaluate using api key code by chandrika
     //$activityTypeIds['customassessment']
 ])) {
     echo '<td>
