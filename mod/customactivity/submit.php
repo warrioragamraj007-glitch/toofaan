@@ -35,6 +35,7 @@ $record->questionid       = $currentq->id;
 $record->userid           = $USER->id;
 $record->tempsave = $answer;
 $record->timespent = max((int)($record->timespent ?? 0), $timespent);
+$record->ipaddress        = getremoteaddr();   // add here
 if (empty($record->id)) {
     $record->timecreated = time();
 }
@@ -62,6 +63,7 @@ if (optional_param('finalsubmit', false, PARAM_BOOL)) {
         $final->userid           = $USER->id;
         $final->questionid       = 0;
         $final->timecreated      = time();
+        $final->ipaddress        = getremoteaddr();
         $DB->insert_record('customactivity_submissions', $final);
     }
 
