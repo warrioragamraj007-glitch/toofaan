@@ -129,6 +129,22 @@ if (!empty($apikey)) {
     $error    = curl_error($ch);
     curl_close($ch);
 
+    // 🔴 ADD HERE
+echo "<pre>";
+echo "API KEY PRESENT: " . (!empty($apikey) ? "YES" : "NO") . "\n\n";
+echo "CURL ERROR: " . ($error ?: "NONE") . "\n\n";
+echo "RAW RESPONSE:\n" . htmlspecialchars($response) . "\n\n";
+
+$data = json_decode($response, true);
+echo "DECODED RESPONSE:\n";
+print_r($data);
+
+$output = $data['choices'][0]['message']['content'] ?? '';
+echo "\nAI OUTPUT:\n" . htmlspecialchars($output);
+echo "</pre>";
+exit;
+// 🔴 END HERE
+
     if (!$error && $response) {
         $data = json_decode($response, true);
         $output = $data['choices'][0]['message']['content'] ?? '';
