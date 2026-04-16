@@ -417,9 +417,14 @@ echo '<div class="current-activity row">
                         }
                         //hp5 crossword updated by chandrika
                         else if($activities[$i]['modtypeid'] == $activityTypeIds['h5pactivity']) {
-        $activityType = 'H5P';           // <<< NEW LINE
-    }
-                         else{
+                            $activityType = 'H5P';         
+                        }
+                        // manual questions adding and evaluate using api key code by chandrika
+                        else if ($activities[$i]['modtypeid'] == $activityTypeIds['customactivity']) {
+
+    $activityType = get_string('modulename', 'customactivity');
+                    } 
+                                            else{
                             //  $activityType="--";
                             continue;
                          }
@@ -500,9 +505,8 @@ echo '<div class="current-activity row">
                             elseif(in_array($activities[$i]['modtypeid'], [
     $activityTypeIds['quiz'], 
     $activityTypeIds['vpl'], 
-    $activityTypeIds['h5pactivity'],
-    //activityTypeIds['customactivity'],
-
+    $activityTypeIds['h5pactivity'], 
+    activityTypeIds['customactivity'], //manual questions adding and evaluate using api key code by chandrika
     //$activityTypeIds['customassessment']
 ])) {
     echo '<td>
@@ -611,8 +615,14 @@ echo '<div class="current-activity row">
         }
         //h5p crossword updated by chandrika
         else if($activities[$i]['modtypeid'] == $activityTypeIds['h5pactivity']) {
-        $activityType = 'H5P';           // <<< NEW LINE
+        $activityType = 'H5P';      
     }
+    // manual questions adding and evaluate using api key code by chandrika
+     else if ($activities[$i]['modtypeid'] == $activityTypeIds['customactivity']) {
+
+    $activityType = get_string('modulename', 'customactivity');
+
+}
          else{
             //  $activityType="--";
             continue;

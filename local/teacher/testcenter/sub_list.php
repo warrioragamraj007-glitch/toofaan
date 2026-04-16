@@ -827,6 +827,136 @@ elseif ($typeid == $activityTypeIds['h5pactivity']) {
     echo '<span style="display:none" id="crstarCount">'.$redstar.'</span>';
     echo '<span style="display:none" id="watchCount">'.$watchCount.'</span>';
 }
+// manual questions adding and evaluate using api key code by chandrika
+elseif ($typeid == $activityTypeIds['customactivity']) {  
+    // ==================== CUSTOM ACTIVITY (e.g., Addition) ====================
+
+    $cm = get_coursemodule_from_id('customactivity', $actid, 0, false, MUST_EXIST);
+$ca = $DB->get_record('customactivity', ['id' => $cm->instance], '*', MUST_EXIST);
+$course = $DB->get_record('course', ['id' => $cm->course], '*', MUST_EXIST);
+        
+      // Get students (role 5 = student)
+     $context = context_course::instance($cm->course);
+    $students = get_role_users(5, $context); 
+
+
+     // Counters
+    $loggedin = $submitted = $graded = $star = $redstar = $watchCount = 0;
+
+    // Custom fields
+     $rollfield = $DB->get_field('user_info_field', 'id', ['shortname' => 'rollno']);
+    $sectionfield = $DB->get_field('user_info_field', 'id', ['shortname' => 'section']);
+
+   
+
+    echo '<div class="repo">
+        <table id="myTable" class="CSSTableGenerator table table-hover course-list-table tablesorter">
+            <thead>
+                <tr>
+                    <th style="text-align:center" class="header">Status</th>
+                    <th class="header">Roll No</th>
+                    <th class="header">Full Name</th>
+                    <th class="header" style="text-align:center">Section</th>
+                    <th class="header" style="text-align:center">IP Address</th>
+                    <th class="header">Last Submission</th>
+                    <th class="header" style="text-align:center">Grade</th>
+                    <th class="header" style="text-align:center">Watch</th>
+                </tr>
+            </thead>
+            <tbody>';
+
+    foreach ($students as $student) {
+        $roll = getTCStudentData($student->id, $rollfield);
+        $section = getTCStudentData($student->id, $sectionfield);
+
+        // Section filter
+        if ($secname !== 'All' && $section !== $secname) continue;
+
+        // Login status
+       $loginstatus = $DB->get_field('userinfo_tsl', 'loginstatus', ['userid' => $student->id]);
+        if (in_array($loginstatus, [2, 4])) $loggedin++;
+
+        // Watchlist
+        $watch = getStatus($student->id, $course->id);
+        if ($watch) $watchCount++;
+
+        // Get latest submission for this student + activity
+        $submission = $DB->get_record_sql("
+            SELECT cs.*, cs.grade as finalgrade
+            FROM {customactivity_submissions} cs
+            WHERE cs.customactivityid = ? AND cs.userid = ?
+            ORDER BY cs.timecreated DESC
+            LIMIT 1
+        ", [$cm->instance, $student->id]);
+
+        // Default values
+        $statusImg = 'flag-red-icon.png';
+        $statusNum = 0;
+        $lastsub = '--';
+        $ipaddr = '-';
+        $grade = 'NS';
+        $gradeNum = -2;
+
+        if ($submission) {
+            $submitted++;
+            $lastsub = userdate($submission->timecreated);
+            $ipaddr = $submission->ipaddress ?: '-';
+
+            // Determine grade
+            if ($submission->grade !== null && $submission->grade >= 0) {
+                $grade = $submission->grade . "/100";
+                $gradeNum = $submission->grade;
+
+                if ($submission->grade >= 100) {
+                    $graded++; $star++;
+                    $statusImg = $watch ? 'red-star.png' : 'green-star.png';
+                    $statusNum = 2;
+                    if ($watch) $redstar++;
+                } elseif ($submission->grade > 0) {
+                    $graded++;
+                    $statusImg = 'flag-green-icon.png';
+                    $statusNum = 2;
+                } else {
+                    $statusImg = 'flag-orange-icon.png';
+                    $statusNum = 1;
+                }
+            } else {
+                $statusImg = 'flag-orange-icon.png';
+                $statusNum = 1;
+                $grade = 'NG';
+                $gradeNum = -1;
+            }
+        }
+
+        $watchIcon = $watch ? 'eye-24-512.png' : 'unwatch-512.png';
+
+        echo '<tr>
+            <td><span style="display:none">' . $statusNum . '</span>
+                <img src="' . $CFG->wwwroot . '/local/teacher/testcenter/images/' . $statusImg . '" width="16px" /></td>
+            <td><a target="_blank" href="' . $CFG->wwwroot . '/report/outline/user.php?id=' . $student->id . '&course=' . $course->id . '&mode=outline">' . htmlspecialchars($roll) . '</a></td>
+            <td><a target="_blank" href="' . $CFG->wwwroot . '/report/outline/user.php?id=' . $student->id . '&course=' . $course->id . '&mode=outline">' . fullname($student) . '</a></td>
+            <td style="text-align:center">' . htmlspecialchars($section) . '</td>
+            <td style="text-align:center" class="ip">' . htmlspecialchars($ipaddr) . '</td>
+            <td>' . $lastsub . '</td>
+            <td style="text-align:center"><span style="display:none">' . $gradeNum . '</span>' . $grade . '</td>
+            <td>
+                <span class="watchlist-status' . $student->id . '" style="display:none">' . ($watch ? 1 : 0) . '</span>
+                <img data-ref="' . ($watch ? 1 : 0) . '" id="' . $student->id . '" class="watchlist" src="' . $CFG->wwwroot . '/local/teacher/testcenter/images/' . $watchIcon . '" width="16px"/>
+            </td>
+        </tr>';
+    }
+
+    echo '</tbody></table></div>';
+
+    // Hidden counters (for live status bar)
+    echo '<span style="display:none" id="loggedinusers">' . $loggedin . '</span>';
+    echo '<span style="display:none" id="csubCount">' . $submitted . '</span>';
+    echo '<span style="display:none" id="cgradeCount">' . ($graded - $star) . '</span>';
+    echo '<span style="display:none" id="cstarCount">' . ($star - $redstar) . '</span>';
+    echo '<span style="display:none" id="crstarCount">' . $redstar . '</span>';
+    echo '<span style="display:none" id="watchCount">' . $watchCount . '</span>';
+}
+
 else{
 require_once('quizsubmissions.php');
 }
