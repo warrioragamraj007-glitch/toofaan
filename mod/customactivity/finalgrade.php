@@ -72,7 +72,6 @@ foreach ($questions as $q) {
         }
     }
 
-
     $prompt .= "Question {$q->qno}:\n{$q->questiontext}\n\n";
     $prompt .= "Model Answer:\n" . trim($q->modelanswer) . "\n\n";
     $prompt .= "Student's Answer:\n{$student_answer}\n\n";
@@ -129,7 +128,6 @@ if (!empty($apikey)) {
     $response = curl_exec($ch);
     $error    = curl_error($ch);
     curl_close($ch);
-
     
 
     if (!$error && $response) {

@@ -2,10 +2,10 @@
 // tempsave.php
 require_once('../../config.php');
 
-$id        = required_param('id', PARAM_INT);
-$qid       = required_param('q', PARAM_INT);
+$id       = required_param('id', PARAM_INT);
+$qid      = required_param('q', PARAM_INT);
+$answer   = optional_param('answer', '', PARAM_RAW);
 $timespent = optional_param('timespent', 0, PARAM_INT);
-$answer    = optional_param('answer', null, PARAM_RAW); // null if not sent
 
 $cm = get_coursemodule_from_id('customactivity', $id, 0, false, MUST_EXIST);
 $course = $DB->get_record('course', ['id' => $cm->course], '*', MUST_EXIST);
@@ -24,19 +24,9 @@ $record = $record ?: new stdClass();
 $record->customactivityid = $activity->id;
 $record->questionid       = $qid;
 $record->userid           = $USER->id;
-
-// only update answer when actually sent
-if ($answer !== null) {
-    $record->tempsave = trim($answer);
-}
-
-$record->timespent = $timespent;
-$record->ipaddress = getremoteaddr();
-
-if (empty($record->id)) {
-    $record->timecreated = time();
-}
-$record->timemodified = time();
+$record->tempsave         = $answer;
+$record->timespent        = $timespent;
+$record->timecreated     = time();
 
 if (!empty($record->id)) {
     $DB->update_record('customactivity_submissions', $record);
@@ -46,10 +36,7 @@ if (!empty($record->id)) {
 
 // If final submit → go to grading
 if (optional_param('finalsubmit', 0, PARAM_BOOL)) {
-    redirect(new moodle_url('/mod/customactivity/finalgrade.php', [
-        'id' => $cm->id,
-        'sesskey' => sesskey()
-    ]));
+    redirect(new moodle_url('/mod/customactivity/finalgrade.php', ['id' => $cm->id]));
 }
 
 echo "saved";
