@@ -183,9 +183,9 @@ else if ($im == 'customactivity') {
     $reflink = $CFG->wwwroot . "/mod/customactivity/view.php?id=" . $activitycm;
 }
 //generating questions using chat gpt code update by chandrika
-      else if ($im == 'customassessment') {
+    else if ($im == 'customassessment') {
     $reflink = $CFG->wwwroot . "/mod/customassessment/view.php?id=" . $activitycm;
-}   
+}  
         elseif(strcasecmp($im, "url") == 0) {
             $tci = $DB->get_field('course_modules', 'instance', array('id' => $activitycm));
             $desc = $DB->get_field_sql("SELECT `externalurl` FROM `mdl_url` WHERE `id` = '$tci'");
