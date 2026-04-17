@@ -17,7 +17,21 @@ $PAGE->set_pagelayout('standard');
 $PAGE->set_context(context_system::instance());
 $PAGE->set_title('Tessellator 5.0-testcenter');
 
+//live notification code by chandrika
+$payload = [
+    'userid'   => $USER->id,
+    'courseid' => $cid,
+    'role'     => 'teacher',
+    'exp'      => time() + 300 // 5 minutes expiry
+];
 
+$secret = 'a8f3d92e8c4b9e0a7c6f1b9a4e72c93f8d21c90a6d5b1f2e8c7a9b0d1e3f4c5';
+$json = json_encode($payload);
+$payload_b64 = base64_encode($json);
+$signature = hash_hmac('sha256', $payload_b64, $secret);
+$token = $payload_b64 . '.' . $signature;
+$wsToken = $token;
+//end of live notification code by chandrika
 //retriving course id from url
 
 $params = explode("-", $_GET['topics']);
@@ -244,7 +258,67 @@ echo '<div class="current-activity row">
            <strong>STATUS:</strong>STATUS :<span style="color: #51f551; font-weight: bold; margin-left: 10px;" class="progress-activity-status">'.$currentActivityStatus.'</span></div>
        </div>
 
+//live notification code by chandrika
+<div style="margin-top: 20px; margin-bottom: 20px; text-align: right; padding: 10px; background: #f0f0f0; border: 1px solid #ddd;">
+    <button id="send-message" class="btn btn-primary" style="padding: 14px 28px !important; background: linear-gradient(135deg, #e67e22 0%, #d35400 100%) !important; color: white !important; border: none !important; border-radius: 12px !important; cursor: pointer; font-size: 16px !important; font-weight: 700 !important; box-shadow: 0 6px 16px rgba(230,126,34,0.4) !important; min-width: 200px;">
+        📤 Send Notification
+    </button>
+</div>
 
+
+<div id="notifyModal" style="display:none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:1000; backdrop-filter: blur(5px);">
+    <div style="background: linear-gradient(135deg, #ffffff 0%, #fff9e6 100%); padding:40px; border-radius:20px; width:90%; max-width:600px; border:2px solid #f8e5c6; box-shadow:0 10px 30px rgba(230,126,34,0.2); position:relative;">
+        <span onclick="closeModal()" style="position:absolute; top:20px; right:24px; font-size:32px; cursor:pointer; color:#a0826d;">×</span>
+        
+        <div style="text-align:center; margin-bottom:32px;">
+            <h2 style="font-size:32px; font-weight:800; background:linear-gradient(135deg,#e67e22 0%,#d35400 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; display:flex; align-items:center; justify-content:center; gap:12px;">
+                Send Notification to Students
+            </h2>
+            <p style="color:#a0826d; font-size:16px;">Broadcast a real-time message to all connected students</p>
+        </div>
+
+        <!-- Quick Messages - FIXED WITH SINGLE QUOTES FOR ONCLICK -->
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px; margin-bottom:32px;">
+            <button onclick="setQuickMessage(\'There will be a short system update in 10 minutes. Please save your work.\')" style="padding:14px 18px; background:white; border:2px solid #f8e5c6; color:#d35400; border-radius:10px; cursor:pointer; font-size:14px; font-weight:600;">
+                System Update Soon
+            </button>
+            <button onclick="setQuickMessage(\'Quiz will start in 10 minutes. Get ready!\')" style="padding:14px 18px; background:white; border:2px solid #f8e5c6; color:#d35400; border-radius:10px; cursor:pointer; font-size:14px; font-weight:600;">
+                Quiz Starting Soon
+            </button>
+            <button onclick="setQuickMessage(\'Urgent notice: Please check the latest instructions.\')" style="padding:14px 18px; background:white; border:2px solid #f8e5c6; color:#d35400; border-radius:10px; cursor:pointer; font-size:14px; font-weight:600;">
+                Important Updates
+            </button>
+            <button onclick="setQuickMessage(\'Class starts in 5 minutes!\')" style="padding:14px 18px; background:white; border:2px solid #f8e5c6; color:#d35400; border-radius:10px; cursor:pointer; font-size:14px; font-weight:600;">
+                Class Starting Soon
+            </button>
+        </div>
+
+        <div style="margin-bottom:24px;">
+            <label style="display:block; font-weight:700; color:#5d4037; margin-bottom:12px; font-size:15px; text-transform:uppercase; letter-spacing:0.5px;">Message Content</label>
+            <textarea id="notifyMessage" placeholder="Type your notification message here..." style="width:100%; padding:16px; border:2px solid #f8e5c6; border-radius:12px; font-size:16px; min-height:150px; resize:vertical; background:white; color:#5d4037;"></textarea>
+        </div>
+
+    <div style="display:flex; gap:16px; justify-content:flex-end; margin-top:24px;">
+    <button
+    type="button"
+    class="btn btn-primary"
+    id="sendModalBtn"
+    onclick="sendNotification()">
+    Send to All Students
+</button>
+
+    <button
+        type="button"
+        class="btn btn-secondary"
+        onclick="closeModal()">
+        Cancel
+    </button>
+</div>
+
+        <div id="responseMessage" style="padding:16px 20px; border-radius:10px; margin-top:20px; font-size:15px; font-weight:600; display:none;"></div>
+    </div>
+</div>
+//end of live notification code by chandrika
 
 <div class="row status-row non-kmit-status">
 
@@ -992,6 +1066,144 @@ $(document).ready(function () {
 </script>
 
 
+<script type="text/javascript">
+    // live notification code by chandrika
+document.addEventListener('DOMContentLoaded', function () {
+
+    const sendBtn = document.getElementById('send-message');
+    const modal = document.getElementById('notifyModal');
+    const notifyMessage = document.getElementById('notifyMessage');
+    const responseEl = document.getElementById('responseMessage');
+    const sendModalBtn = document.getElementById('sendModalBtn');
+    const courseEl = document.getElementById('courseid');
+
+    if (!sendBtn || !modal || !notifyMessage || !courseEl || !sendModalBtn) {
+        console.error('Required elements not found');
+        return;
+    }
+
+    const COURSE_ID = courseEl.value.trim();
+    const WS_TOKEN = "<?= $wsToken ?>";
+
+    let socket = null;
+    let reconnectAttempts = 0;
+    const MAX_RETRIES = 5;
+
+    function connectWebSocket() {
+        if (socket && socket.readyState === WebSocket.OPEN) return;
+
+        if (reconnectAttempts >= MAX_RETRIES) {
+            showResponse('❌ Unable to connect to notification server after multiple attempts.', 'error');
+            return;
+        }
+
+        const socketUrl = `ws://${window.location.hostname}:8080/?token=${encodeURIComponent(WS_TOKEN)}`;
+        socket = new WebSocket(socketUrl);
+
+        socket.onopen = () => {
+            console.log('✅ WebSocket connected');
+            reconnectAttempts = 0;
+            showResponse('🟢 Connected to notification server', 'success');
+        };
+
+        socket.onclose = () => {
+            reconnectAttempts++;
+            console.warn(`Connection closed. Reconnect attempt ${reconnectAttempts}/${MAX_RETRIES}`);
+            setTimeout(connectWebSocket, 3000);
+        };
+
+        socket.onerror = (err) => {
+            console.error('WebSocket error:', err);
+        };
+
+        socket.onmessage = (event) => {
+            try {
+                const data = JSON.parse(event.data);
+
+                if (data.type === 'notify_success') {
+                    const count = data.sentTo;
+                    const msg = count === 0
+                        ? '⚠️ Message sent but no students are currently online'
+                        : `✅ Message sent to ${count} student${count > 1 ? 's' : ''}`;
+
+                    showResponse(`${msg}<br><strong>"${data.message}"</strong>`, 'success')
+                     notifyMessage.value = '';           
+             setTimeout(() => closeModal(), 1500);
+
+                    // Properly reset button
+                    sendModalBtn.disabled = false;
+                    sendModalBtn.textContent = 'Send to All Students';
+                }
+
+                if (data.type === 'error') {
+                    showResponse('❌ ' + data.message, 'error');
+                    sendModalBtn.disabled = false;
+                    sendModalBtn.textContent = 'Send to All Students';
+                }
+
+            } catch (e) {
+                console.error('Invalid message from server:', event.data);
+            }
+        };
+    }
+
+    connectWebSocket();
+
+    // Modal controls
+    sendBtn.addEventListener('click', () => {
+        modal.style.display = 'flex';
+        notifyMessage.focus();
+    });
+
+    window.closeModal = function () {
+        modal.style.display = 'none';
+        notifyMessage.value = '';
+        responseEl.style.display = 'none';
+        responseEl.innerHTML = '';
+        responseEl.className = '';
+        if (sendModalBtn) {
+            sendModalBtn.disabled = false;
+            sendModalBtn.textContent = 'Send to All Students';
+        }
+    };
+
+    window.setQuickMessage = function (msg) {
+        notifyMessage.value = msg;
+        notifyMessage.focus();
+    };
+
+    window.sendNotification = function () {
+        const message = notifyMessage.value.trim();
+
+        if (!message) {
+            showResponse('Please enter a message', 'error');
+            return;
+        }
+
+        if (!socket || socket.readyState !== WebSocket.OPEN) {
+            showResponse('❌ Connection lost. Please refresh the page.', 'error');
+            return;
+        }
+
+        sendModalBtn.disabled = true;
+        sendModalBtn.textContent = 'Sending...';
+
+        socket.send(JSON.stringify({
+            type: 'notify',
+            message: message
+        }));
+    };
+
+    function showResponse(text, type) {
+        responseEl.innerHTML = text;
+        responseEl.className = type;
+        responseEl.style.display = 'block';
+        responseEl.style.backgroundColor = type === 'success' ? '#d4edda' : '#f8d7da';
+        responseEl.style.color = type === 'success' ? '#155724' : '#721c24';
+        responseEl.style.border = `1px solid ${type === 'success' ? '#c3e6cb' : '#f5c6cb'}`;
+    }
+});
+</script>
 
 
 
