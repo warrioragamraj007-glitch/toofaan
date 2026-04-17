@@ -17,21 +17,7 @@ $PAGE->set_pagelayout('standard');
 $PAGE->set_context(context_system::instance());
 $PAGE->set_title('Tessellator 5.0-testcenter');
 
-//live notification code by chandrika
-$payload = [
-    'userid'   => $USER->id,
-    'courseid' => $cid,
-    'role'     => 'teacher',
-    'exp'      => time() + 300 // 5 minutes expiry
-];
 
-$secret = 'a8f3d92e8c4b9e0a7c6f1b9a4e72c93f8d21c90a6d5b1f2e8c7a9b0d1e3f4c5';
-$json = json_encode($payload);
-$payload_b64 = base64_encode($json);
-$signature = hash_hmac('sha256', $payload_b64, $secret);
-$token = $payload_b64 . '.' . $signature;
-$wsToken = $token;
-//end of live notification code by chandrika
 //retriving course id from url
 
 $params = explode("-", $_GET['topics']);
@@ -99,9 +85,25 @@ if (!(user_has_role_assignment($USER->id,3) ) ) {
 else{
     //redirect($CFG->wwwroot.'/local/teacher/dashboard.php');
 }
-
-// generating questions using chat gpt code by chandrika
 echo '<input type="hidden" id="courseid" value="'.$cid.'" />';
+
+//live notification code by chandrika
+$payload = [
+    'userid'   => $USER->id,
+    'courseid' => $cid,
+    'role'     => 'teacher',
+    'exp'      => time() + 300 // 5 minutes expiry
+];
+
+$secret = 'a8f3d92e8c4b9e0a7c6f1b9a4e72c93f8d21c90a6d5b1f2e8c7a9b0d1e3f4c5';
+$json = json_encode($payload);
+$payload_b64 = base64_encode($json);
+$signature = hash_hmac('sha256', $payload_b64, $secret);
+$token = $payload_b64 . '.' . $signature;
+$wsToken = $token;
+//end of live notification code by chandrika
+// generating questions using chat gpt code by chandrika
+
 // ================= Queue Summary (Evaluation Progress) for assessment by chandrika=================
 $queuesummary = $DB->get_record_sql(
     "SELECT
@@ -1097,7 +1099,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        const socketUrl = `ws://${window.location.hostname}:8080/?token=${encodeURIComponent(WS_TOKEN)}`;
+        const socketUrl = `ws://${window.location.hostname}:8081/?token=${encodeURIComponent(WS_TOKEN)}`;
         socket = new WebSocket(socketUrl);
 
         socket.onopen = () => {
