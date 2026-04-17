@@ -47,7 +47,7 @@ echo "const courseMap = " . json_encode($courseMap) . ";\n";
 echo "const enrolledCourseIds = " . json_encode($enrolledCourseIds) . ";\n";
 echo "const courseTokens = " . json_encode($courseTokens) . ";\n";
 
-echo "const WS_SERVER_URL = 'ws://' + window.location.hostname + ':8080';\n\n";
+echo "const WS_SERVER_URL = 'ws://' + window.location.hostname + ':8081';\n\n";
 ?>
 
 (function() {
