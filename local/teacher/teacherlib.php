@@ -149,50 +149,123 @@ function getStudentSectionsByCourse($courseid){
 
     return $html;
 }
-function getGradeByActivity($studentId,$courseid,$module,$instance,$vpl){
+// function getGradeByActivity($studentId,$courseid,$module,$instance,$vpl){
 
-    global $DB;
-    /**************GETTING ITEM NAME **********/
+//     global $DB;
+//     /**************GETTING ITEM NAME **********/
    
-    $sql_item="SELECT name
-        FROM mdl_modules
-        WHERE id ='".$module."'";
-    $item_res=$DB->get_record_sql($sql_item);
-    $itemname= $item_res->name;
-    $grading_info=grade_get_grades($courseid, 'mod', $itemname,$instance, $studentId);
-    // var_dump($grading_info);
-    $item = $grading_info->items[0];
-    // var_dump($item);
-    // if($studentId==6){
-    //     echo "studentid and module ".$studentId." ".$instance;
-    //     echo $itemname;
-    //     var_dump($grading_info);
-    // }
-    $gradeI= $item->grades[$studentId];
-    $grade = $gradeI->grade ;
+//     $sql_item="SELECT name
+//         FROM mdl_modules
+//         WHERE id ='".$module."'";
+//     $item_res=$DB->get_record_sql($sql_item);
+//     $itemname= $item_res->name;
+//     $grading_info=grade_get_grades($courseid, 'mod', $itemname,$instance, $studentId);
+//     // var_dump($grading_info);
+//     $item = $grading_info->items[0];
+//     // var_dump($item);
+//     // if($studentId==6){
+//     //     echo "studentid and module ".$studentId." ".$instance;
+//     //     echo $itemname;
+//     //     var_dump($grading_info);
+//     // }
+//     $gradeI= $item->grades[$studentId];
+//     $grade = $gradeI->grade ;
 
-    /***logic to count total activities and attempted activities***/
-    if($module==$vpl){
+//     /***logic to count total activities and attempted activities***/
+//     if($module==$vpl){
 
-        if($grade)
-        {
-        }else{
+//         if($grade)
+//         {
+//         }else{
 
-            $tsql="SELECT  datesubmitted
-                        FROM mdl_vpl_submissions
-                        WHERE vpl ='".$instance."'
-                        AND userid ='".$studentId."'";
+//             $tsql="SELECT  datesubmitted
+//                         FROM mdl_vpl_submissions
+//                         WHERE vpl ='".$instance."'
+//                         AND userid ='".$studentId."'";
 
-            $submissions=$DB->get_fieldset_sql($tsql);
-            if( count($submissions)>0)
-            {
+//             $submissions=$DB->get_fieldset_sql($tsql);
+//             if( count($submissions)>0)
+//             {
+//                 return -1;
+//             }
+//         }
+
+//     }
+//     // var_dump($grade);
+//     //         exit(0);
+//     return $grade;
+// }
+// updated  the code to handle the assignment module grades and submission status by chandrika
+function getGradeByActivity($studentId,$courseid,$module,$instance,$vpl){
+    global $DB;
+
+    $sql_item = "SELECT name
+                 FROM mdl_modules
+                 WHERE id = '".$module."'";
+    $item_res = $DB->get_record_sql($sql_item);
+
+    if (!$item_res) {
+        return NULL;
+    }
+
+    $itemname = $item_res->name;
+
+    // 1. Try from Moodle gradebook first
+    $grading_info = grade_get_grades($courseid, 'mod', $itemname, $instance, $studentId);
+
+    $grade = NULL;
+    if (!empty($grading_info->items) &&
+        !empty($grading_info->items[0]) &&
+        isset($grading_info->items[0]->grades[$studentId])) {
+        $grade = $grading_info->items[0]->grades[$studentId]->grade;
+    }
+
+    // 2. VPL special handling
+    if ($module == $vpl) {
+        if ($grade !== NULL && $grade !== '') {
+            return $grade;
+        } else {
+            $tsql = "SELECT datesubmitted
+                     FROM mdl_vpl_submissions
+                     WHERE vpl = '".$instance."'
+                     AND userid = '".$studentId."'";
+
+            $submissions = $DB->get_fieldset_sql($tsql);
+
+            if (count($submissions) > 0) {
                 return -1;
             }
         }
-
     }
-    // var_dump($grade);
-    //         exit(0);
+
+    // 3. Assignment fallback
+    if ($itemname == 'assign' && ($grade === NULL || $grade === '')) {
+        $asql = "SELECT grade
+                 FROM mdl_assign_grades
+                 WHERE assignment = '".$instance."'
+                 AND userid = '".$studentId."'
+                 ORDER BY timemodified DESC
+                 LIMIT 1";
+
+        $assigngrade = $DB->get_field_sql($asql);
+
+        if ($assigngrade !== false && $assigngrade !== NULL && $assigngrade !== '') {
+            return $assigngrade;
+        }
+
+        $ssql = "SELECT status
+                 FROM mdl_assign_submission
+                 WHERE assignment = '".$instance."'
+                 AND userid = '".$studentId."'
+                 LIMIT 1";
+
+        $submissionstatus = $DB->get_field_sql($ssql);
+
+        if ($submissionstatus) {
+            return -1; // submitted but not graded
+        }
+    }
+
     return $grade;
 }
 
@@ -292,7 +365,7 @@ function get_students_activity_summary($courseid,$topicid,$stdsection,$topicname
 
 }
 
-function getAllActivitiesByTopicAndCourse($courseid, $topicid, $vpl, $quiz)
+/*function getAllActivitiesByTopicAndCourse($courseid, $topicid, $vpl, $quiz)
 {
     global $DB;
 
@@ -335,7 +408,60 @@ function getAllActivitiesByTopicAndCourse($courseid, $topicid, $vpl, $quiz)
     }
     $activities = array_values($activitieswithdate);
     return $activities;
+}*/
+
+//updated the function to get all the vpl.quiz,assign activites by chandrika
+function getAllActivitiesByTopicAndCourse($courseid, $topicid, $vpl, $quiz, $assign = null)
+{
+    global $DB;
+
+    $modulelist = array($vpl, $quiz);
+    if (!empty($assign)) {
+        $modulelist[] = $assign;
+    }
+    $modulelist = implode(',', $modulelist);
+
+    $activities = array();
+
+    // Checking for current activities attempted grades
+    $startedActivitiesSql = "SELECT * FROM `mdl_activity_status_tsl` WHERE `status` = 1 OR `status` = 0";
+    $startedActivitiesRes = $DB->get_records_sql($startedActivitiesSql);
+
+    $startedActivityIds = array();
+    $startdate = '';
+
+    foreach ($startedActivitiesRes as $item) {
+        $startedActivityIds[] = $item->activityid;
+        if (!empty($item->activity_start_time)) {
+            $startdate = date("Y-m-d", $item->activity_start_time);
+        }
+    }
+
+    $activitieswithdate = array();
+
+    if (count($startedActivityIds) > 0) {
+        $rsql = "SELECT * FROM mdl_course_modules
+                 WHERE id IN (" . implode(',', $startedActivityIds) . ")
+                 AND course = '" . $courseid . "'
+                 AND section = " . $topicid . "
+                 AND module IN(" . $modulelist . ")";
+
+        $currentRes = $DB->get_records_sql($rsql);
+
+        foreach ($currentRes as $item) {
+            $activitieswithdate[] = array(
+                "id" => $item->id,
+                "module" => $item->module,
+                "instance" => $item->instance,
+                "startdate" => $startdate
+            );
+        }
+    }
+
+    $activities = array_values($activitieswithdate);
+    return $activities;
 }
+
 // function getcourse(){
 //     global $DB;
 //     $teacher_courses = enrol_get_my_courses();
@@ -702,6 +828,7 @@ $phonefield=$DB->get_field('user_info_field', 'id', array('shortname'=>'studentc
 
     $vpl = $DB->get_field('modules', 'id', array('name' => 'vpl'));
     $quiz=$DB->get_field('modules', 'id', array('name'=>'quiz'));
+    $assign = $DB->get_field('modules', 'id', array('name'=>'assign'));
     $html='<thead>
                                 <tr>
                                    <!-- <th class="header" style="text-align:center">Course</th>-->
@@ -715,7 +842,11 @@ $phonefield=$DB->get_field('user_info_field', 'id', array('shortname'=>'studentc
                                     <th style="text-align:center" class="header">Graded</th>
                                     ';
 
-    $activities=getAllActivitiesByTopicAndCourse($courseid,$topicid,$vpl,$quiz);
+    $activities=getAllActivitiesByTopicAndCourse($courseid,$topicid,$vpl,$quiz,$assign);
+    //        echo "Assign module id: ".$assign."<br>";
+// echo "<pre>";
+// print_r($activities);
+// echo "</pre>";
 	//var_dump($activities);
     $labcount=0;$qcount=0;
     for($i=0;$i<count($activities);$i++){
